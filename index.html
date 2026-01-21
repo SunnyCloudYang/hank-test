@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>现代汉语虚词练习平台</title>
+    <!-- Vue 3 CDN -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <!-- 样式文件 -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div id="app">
+        <!-- 欢迎页 -->
+        <div v-if="currentPage === 'welcome'" class="page welcome-page">
+            <div class="container">
+                <header class="welcome-header">
+                    <h1 class="title">现代汉语虚词练习平台</h1>
+                    <p class="subtitle">面向中文教育专业本科生的自适应学习系统</p>
+                </header>
+
+                <section class="intro-section">
+                    <div class="intro-card">
+                        <h2>📚 平台说明</h2>
+                        <p>本平台专为现代汉语语法教学设计，涵盖<strong>介词、助词、连词、语气词</strong>四大虚词类别，通过智能自适应机制帮助您精准定位学习薄弱点。</p>
+                    </div>
+
+                    <div class="intro-card">
+                        <h2>🎯 难度规则</h2>
+                        <ul class="rule-list">
+                            <li><span class="badge basic">基础题</span> 初始难度为基础题</li>
+                            <li><span class="badge upgrade">↑ 升级</span> 连续答对 <strong>3 道</strong>基础题 → 切换为进阶题</li>
+                            <li><span class="badge downgrade">↓ 降级</span> 答错 <strong>2 道</strong>进阶题 → 切回基础题</li>
+                            <li><span class="badge info">随机</span> 同难度下题目随机抽取，已答题目不重复</li>
+                        </ul>
+                    </div>
+
+                    <div class="intro-card">
+                        <h2>📋 答题须知</h2>
+                        <ul class="notice-list">
+                            <li>题型包括：单项选择题、多项选择题、判断对错题</li>
+                            <li>每道题提交后立即显示对错反馈和详细解析</li>
+                            <li>答题过程中可随时暂停或重置练习</li>
+                            <li>练习结束后将生成精细化学习测评报告</li>
+                            <li>答题数据仅在本地浏览器临时保存</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <div class="start-section">
+                    <button class="btn btn-primary btn-large" @click="startPractice">
+                        开始练习
+                    </button>
+                    <p class="tip">题库共 {{ totalQuestions }} 道题目</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 练习页 -->
+        <div v-if="currentPage === 'practice'" class="page practice-page">
+            <div class="practice-container">
+                <!-- 顶部状态栏 -->
+                <header class="practice-header">
+                    <div class="header-left">
+                        <span class="level-badge" :class="currentLevel">
+                            {{ currentLevel === 'basic' ? '基础题' : '进阶题' }}
+                        </span>
+                        <span class="question-count">
+                            第 {{ answeredCount + 1 }} / {{ totalQuestions }} 题
+                        </span>
+                    </div>
+                    <div class="header-right">
+                        <button class="btn btn-small btn-outline" @click="showPauseModal = true">
+                            暂停
+                        </button>
+                    </div>
+                </header>
+
+                <!-- 进度条 -->
+                <div class="progress-bar">
+                    <div class="progress-fill" :style="{ width: progressPercent + '%' }"></div>
+                </div>
+
+                <!-- 题目区域 -->
+                <main class="question-area" v-if="currentQuestion">
+                    <!-- 题目类型标签 -->
+                    <div class="question-meta">
+                        <span class="type-badge" :class="currentQuestion.type">
+                            {{ questionTypeLabel }}
+                        </span>
+                        <span class="category-badge">
+                            {{ categoryLabel }}
+                        </span>
+                    </div>
+
+                    <!-- 题干 -->
+                    <div class="question-stem">
+                        <p>{{ currentQuestion.stem }}</p>
+                    </div>
+
+                    <!-- 选项区域 -->
+                    <div class="options-area">
+                        <!-- 单选题 / 多选题 -->
+                        <template v-if="currentQuestion.type !== 'judgment'">
+                            <div v-for="option in currentQuestion.options" :key="option.key" class="option-item" :class="{
+                                    'selected': userAnswer.includes(option.key),
+                                    'correct': showFeedback && currentQuestion.answer.includes(option.key),
+                                    'wrong': showFeedback && userAnswer.includes(option.key) && !currentQuestion.answer.includes(option.key),
+                                    'disabled': showFeedback
+                                }" @click="selectOption(option.key)">
+                                <span class="option-key">{{ option.key }}</span>
+                                <span class="option-text">{{ option.text }}</span>
+                                <span v-if="showFeedback && currentQuestion.answer.includes(option.key)"
+                                    class="option-icon correct-icon">✓</span>
+                                <span
+                                    v-if="showFeedback && userAnswer.includes(option.key) && !currentQuestion.answer.includes(option.key)"
+                                    class="option-icon wrong-icon">✗</span>
+                            </div>
+                        </template>
+
+                        <!-- 判断题 -->
+                        <template v-else>
+                            <div class="option-item judgment-option" :class="{
+                                    'selected': userAnswer.includes('T'),
+                                    'correct': showFeedback && currentQuestion.answer.includes('T'),
+                                    'wrong': showFeedback && userAnswer.includes('T') && !currentQuestion.answer.includes('T'),
+                                    'disabled': showFeedback
+                                }" @click="selectOption('T')">
+                                <span class="option-key">✓</span>
+                                <span class="option-text">正确</span>
+                            </div>
+                            <div class="option-item judgment-option" :class="{
+                                    'selected': userAnswer.includes('F'),
+                                    'correct': showFeedback && currentQuestion.answer.includes('F'),
+                                    'wrong': showFeedback && userAnswer.includes('F') && !currentQuestion.answer.includes('F'),
+                                    'disabled': showFeedback
+                                }" @click="selectOption('F')">
+                                <span class="option-key">✗</span>
+                                <span class="option-text">错误</span>
+                            </div>
+                        </template>
+                    </div>
+
+                    <!-- 多选题提示 -->
+                    <p v-if="currentQuestion.type === 'multiple'" class="multi-hint">
+                        （多选题，请选择所有正确答案）
+                    </p>
+
+                    <!-- 提交按钮 -->
+                    <div class="action-area" v-if="!showFeedback">
+                        <button class="btn btn-primary" :disabled="userAnswer.length === 0" @click="submitAnswer">
+                            提交答案
+                        </button>
+                    </div>
+
+                    <!-- 反馈区域 -->
+                    <div v-if="showFeedback" class="feedback-area" :class="isCorrect ? 'correct' : 'wrong'">
+                        <div class="feedback-header">
+                            <span class="feedback-icon">{{ isCorrect ? '✓' : '✗' }}</span>
+                            <span class="feedback-text">{{ isCorrect ? '回答正确！' : '回答错误' }}</span>
+                        </div>
+
+                        <div class="feedback-answer">
+                            <strong>正确答案：</strong>{{ currentQuestion.answer.join('、') }}
+                        </div>
+
+                        <!-- 解析折叠区 -->
+                        <div class="analysis-section">
+                            <button class="analysis-toggle" @click="showAnalysis = !showAnalysis">
+                                {{ showAnalysis ? '收起解析 ▲' : '查看解析 ▼' }}
+                            </button>
+                            <div v-if="showAnalysis" class="analysis-content">
+                                <p>{{ currentQuestion.analysis }}</p>
+                            </div>
+                        </div>
+
+                        <!-- 下一题按钮 -->
+                        <div class="next-action">
+                            <button class="btn btn-primary" @click="nextQuestion">
+                                {{ hasMoreQuestions ? '下一题' : '查看报告' }}
+                            </button>
+                        </div>
+                    </div>
+                </main>
+
+                <!-- 无更多题目提示 -->
+                <div v-else class="no-questions">
+                    <p>当前难度下已无更多题目</p>
+                    <button class="btn btn-primary" @click="finishPractice">查看报告</button>
+                </div>
+            </div>
+
+            <!-- 暂停弹窗 -->
+            <div v-if="showPauseModal" class="modal-overlay">
+                <div class="modal">
+                    <h3>练习已暂停</h3>
+                    <p>已答题数：{{ answeredCount }} 题</p>
+                    <p>当前正确率：{{ currentAccuracy }}%</p>
+                    <div class="modal-actions">
+                        <button class="btn btn-primary" @click="showPauseModal = false">继续练习</button>
+                        <button class="btn btn-outline" @click="confirmReset">重置练习</button>
+                        <button class="btn btn-secondary" @click="finishPractice">结束并查看报告</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 报告页 -->
+        <div v-if="currentPage === 'report'" class="page report-page">
+            <div class="container">
+                <header class="report-header">
+                    <h1>学习测评报告</h1>
+                    <p class="report-time">{{ reportData.generatedTime }}</p>
+                </header>
+
+                <!-- 基础数据统计 -->
+                <section class="report-section stats-section">
+                    <h2>📊 基础数据</h2>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-value">{{ reportData.totalCount }}</div>
+                            <div class="stat-label">总答题数</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" :class="getAccuracyClass(reportData.accuracy)">
+                                {{ reportData.accuracy }}%
+                            </div>
+                            <div class="stat-label">总正确率</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">{{ reportData.basicAccuracy }}%</div>
+                            <div class="stat-label">基础题正确率</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">{{ reportData.advancedAccuracy }}%</div>
+                            <div class="stat-label">进阶题正确率</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 虚词类别分析 -->
+                <section class="report-section category-section">
+                    <h2>📈 虚词类别分析</h2>
+                    <div class="category-chart">
+                        <div v-for="(data, category) in reportData.categoryAnalysis" :key="category"
+                            class="category-bar-item">
+                            <div class="category-info">
+                                <span class="category-name">{{ getCategoryName(category) }}</span>
+                                <span class="category-stats">
+                                    {{ data.correct }}/{{ data.total }} 正确
+                                </span>
+                            </div>
+                            <div class="category-bar">
+                                <div class="category-bar-fill" :class="getAccuracyClass(data.accuracy)"
+                                    :style="{ width: data.accuracy + '%' }"></div>
+                            </div>
+                            <span class="category-percent">{{ data.accuracy }}%</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 薄弱点分析 -->
+                <section class="report-section weakness-section">
+                    <h2>🎯 薄弱点定位</h2>
+                    <div v-if="reportData.weakPoints.length === 0" class="no-weakness">
+                        <p>🎉 恭喜！本次练习未发现明显薄弱点。</p>
+                    </div>
+                    <div v-else class="weakness-list">
+                        <div v-for="(point, index) in reportData.weakPoints" :key="index" class="weakness-item">
+                            <div class="weakness-header">
+                                <span class="weakness-category">{{ getCategoryName(point.category) }}</span>
+                                <span class="weakness-tag">{{ point.tag }}</span>
+                            </div>
+                            <div class="weakness-stats">
+                                <span class="error-count">错误 {{ point.wrongCount }} 次 / 共 {{ point.totalCount }}
+                                    题</span>
+                                <span class="error-rate">错误率 {{ point.errorRate }}%</span>
+                            </div>
+                            <div class="weakness-detail">
+                                <p>{{ point.description }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 学习建议 -->
+                <section class="report-section suggestion-section">
+                    <h2>📝 学习建议</h2>
+                    <div v-if="reportData.suggestions.length === 0" class="no-suggestion">
+                        <p>继续保持良好的学习状态！</p>
+                    </div>
+                    <div v-else class="suggestion-list">
+                        <div v-for="(suggestion, index) in reportData.suggestions" :key="index" class="suggestion-item">
+                            <div class="suggestion-title">
+                                <span class="suggestion-number">{{ index + 1 }}</span>
+                                {{ suggestion.title }}
+                            </div>
+                            <div class="suggestion-content">
+                                <p>{{ suggestion.content }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 操作区域 -->
+                <div class="report-actions">
+                    <button class="btn btn-primary btn-large" @click="restartPractice">
+                        重新练习
+                    </button>
+                    <button class="btn btn-outline btn-large" @click="downloadReport">
+                        保存为 PDF
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 引入JS模块 -->
+    <script src="js/questions.js"></script>
+    <script src="js/adaptive-engine.js"></script>
+    <script src="js/report-generator.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>
