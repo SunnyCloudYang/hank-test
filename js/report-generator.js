@@ -47,24 +47,24 @@ const ReportGenerator = {
         const totalCount = records.length;
         const correctCount = records.filter(r => r.isCorrect).length;
         
-        // 按难度统计
-        const basicRecords = records.filter(r => r.level === 'basic');
-        const advancedRecords = records.filter(r => r.level === 'advanced');
+        // 按难度统计 (L1=基础, L2=进阶)
+        const L1Records = records.filter(r => r.level === 'L1');
+        const L2Records = records.filter(r => r.level === 'L2');
         
-        const basicCorrect = basicRecords.filter(r => r.isCorrect).length;
-        const advancedCorrect = advancedRecords.filter(r => r.isCorrect).length;
+        const L1Correct = L1Records.filter(r => r.isCorrect).length;
+        const L2Correct = L2Records.filter(r => r.isCorrect).length;
 
         return {
             totalCount,
             correctCount,
             wrongCount: totalCount - correctCount,
             accuracy: this._calcPercent(correctCount, totalCount),
-            basicCount: basicRecords.length,
-            basicCorrect,
-            basicAccuracy: this._calcPercent(basicCorrect, basicRecords.length),
-            advancedCount: advancedRecords.length,
-            advancedCorrect,
-            advancedAccuracy: this._calcPercent(advancedCorrect, advancedRecords.length)
+            L1Count: L1Records.length,
+            L1Correct,
+            L1Accuracy: this._calcPercent(L1Correct, L1Records.length),
+            L2Count: L2Records.length,
+            L2Correct,
+            L2Accuracy: this._calcPercent(L2Correct, L2Records.length)
         };
     },
 
@@ -265,12 +265,12 @@ const ReportGenerator = {
             correctCount: 0,
             wrongCount: 0,
             accuracy: 0,
-            basicCount: 0,
-            basicCorrect: 0,
-            basicAccuracy: 0,
-            advancedCount: 0,
-            advancedCorrect: 0,
-            advancedAccuracy: 0,
+            L1Count: 0,
+            L1Correct: 0,
+            L1Accuracy: 0,
+            L2Count: 0,
+            L2Correct: 0,
+            L2Accuracy: 0,
             categoryAnalysis: {
                 preposition: { total: 0, correct: 0, wrong: 0, accuracy: 0 },
                 particle: { total: 0, correct: 0, wrong: 0, accuracy: 0 },
@@ -301,8 +301,8 @@ const ReportGenerator = {
         text += '【基础数据】\n';
         text += `总答题数：${report.totalCount} 题\n`;
         text += `总正确率：${report.accuracy}%\n`;
-        text += `基础题：${report.basicCorrect}/${report.basicCount} 正确（${report.basicAccuracy}%）\n`;
-        text += `进阶题：${report.advancedCorrect}/${report.advancedCount} 正确（${report.advancedAccuracy}%）\n\n`;
+        text += `L1（基础）：${report.L1Correct}/${report.L1Count} 正确（${report.L1Accuracy}%）\n`;
+        text += `L2（进阶）：${report.L2Correct}/${report.L2Count} 正确（${report.L2Accuracy}%）\n\n`;
 
         // 类别分析
         text += '【虚词类别分析】\n';

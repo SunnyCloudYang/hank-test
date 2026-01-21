@@ -34,6 +34,7 @@ const app = createApp({
         // ========== 连续答对与庆祝效果 ==========
         const consecutiveCorrect = ref(0);
         const showCelebration = ref(false);
+        const celebrationClosing = ref(false);
         const celebrationType = ref(''); // 'minor' | 'major'
 
         // ========== 答题记录 ==========
@@ -44,7 +45,7 @@ const app = createApp({
         });
 
         // ========== 自适应引擎状态 ==========
-        const currentLevel = ref('basic');
+        const currentLevel = ref('L1');
         const answeredCount = computed(() => session.records.length);
 
         // ========== 报告数据 ==========
@@ -116,7 +117,7 @@ const app = createApp({
             const nextQ = AdaptiveEngine.getNextQuestion(questions.value);
             currentQuestion.value = nextQ;
             currentLevel.value = AdaptiveEngine.getCurrentLevel();
-            
+
             // 重置答题状态
             userAnswer.value = [];
             showFeedback.value = false;
@@ -153,7 +154,7 @@ const app = createApp({
             if (userAnswer.value.length === 0) return;
 
             const q = currentQuestion.value;
-            
+
             // 判断是否正确
             const correctAnswer = [...q.answer].sort();
             const userAnswerSorted = [...userAnswer.value].sort();
@@ -211,19 +212,24 @@ const app = createApp({
         function triggerCelebration(type) {
             celebrationType.value = type;
             showCelebration.value = true;
-            
+
             // 自动关闭庆祝效果
-            const duration = type === 'major' ? 4000 : 2500;
+            const duration = type === 'major' ? 2500 : 1500;
             setTimeout(() => {
-                showCelebration.value = false;
+                closeCelebration();
             }, duration);
         }
 
         /**
-         * 关闭庆祝效果
+         * 关闭庆祝效果（带淡出动画）
          */
         function closeCelebration() {
-            showCelebration.value = false;
+            if (celebrationClosing.value) return; // 防止重复触发
+            celebrationClosing.value = true;
+            setTimeout(() => {
+                showCelebration.value = false;
+                celebrationClosing.value = false;
+            }, 300); // 与 CSS 动画时长匹配
         }
 
         /**
@@ -243,7 +249,7 @@ const app = createApp({
         function finishPractice() {
             // 生成报告
             reportData.value = ReportGenerator.generate(session.records);
-            
+
             // 切换到报告页
             currentPage.value = 'report';
 
@@ -270,10 +276,10 @@ const app = createApp({
             currentQuestion.value = null;
             reportData.value = {};
             consecutiveCorrect.value = 0;
-            
+
             // 返回欢迎页
             currentPage.value = 'welcome';
-            
+
             // 清除 localStorage
             clearSession();
         }
@@ -286,10 +292,10 @@ const app = createApp({
             // 设置打印标题
             const originalTitle = document.title;
             document.title = `虚词练习报告_${formatDate(new Date())}`;
-            
+
             // 触发打印对话框（用户可选择"另存为PDF"）
             window.print();
-            
+
             // 恢复原标题
             setTimeout(() => {
                 document.title = originalTitle;
@@ -389,11 +395,11 @@ const app = createApp({
         return {
             // 页面状态
             currentPage,
-            
+
             // 题库
             questions,
             totalQuestions,
-            
+
             // 练习状态
             currentQuestion,
             userAnswer,
@@ -403,22 +409,23 @@ const app = createApp({
             showPauseModal,
             currentLevel,
             answeredCount,
-            
+
             // 庆祝效果
             consecutiveCorrect,
             showCelebration,
+            celebrationClosing,
             celebrationType,
-            
+
             // 计算属性
             progressPercent,
             questionTypeLabel,
             categoryLabel,
             currentAccuracy,
             hasMoreQuestions,
-            
+
             // 报告
             reportData,
-            
+
             // 方法
             startPractice,
             selectOption,

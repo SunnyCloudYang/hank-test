@@ -29,9 +29,9 @@
                     <div class="intro-card">
                         <h2>🎯 难度规则</h2>
                         <ul class="rule-list">
-                            <li><span class="badge basic">基础题</span> 初始难度为基础题</li>
-                            <li><span class="badge upgrade">↑ 升级</span> 连续答对 <strong>3 道</strong>基础题 → 切换为进阶题</li>
-                            <li><span class="badge downgrade">↓ 降级</span> 答错 <strong>2 道</strong>进阶题 → 切回基础题</li>
+                            <li><span class="badge L1">基础</span> 初始难度为基础题</li>
+                            <li><span class="badge upgrade">↑ 升级</span> 连续答对 <strong>3 道</strong> 基础题 → 切换为进阶题</li>
+                            <li><span class="badge downgrade">↓ 降级</span> 答错 <strong>2 道</strong> 进阶题 → 切回基础题</li>
                             <li><span class="badge info">随机</span> 同难度下题目随机抽取，已答题目不重复</li>
                         </ul>
                     </div>
@@ -64,7 +64,7 @@
                 <header class="practice-header">
                     <div class="header-left">
                         <span class="level-badge" :class="currentLevel">
-                            {{ currentLevel === 'basic' ? '基础题' : '进阶题' }}
+                            {{ currentLevel === 'L1' ? '基础' : '进阶' }}
                         </span>
                         <span class="question-count">
                             第 {{ answeredCount + 1 }} / {{ totalQuestions }} 题
@@ -167,7 +167,18 @@
                         <!-- 正确答案卡片 -->
                         <div class="answer-card">
                             <div class="answer-label">正确答案</div>
-                            <div class="answer-value">{{ currentQuestion.answer.join('、') }}</div>
+                            <div class="answer-value">
+                                <template v-if="currentQuestion.type === 'judgment'">
+                                    {{
+                                    currentQuestion.answer
+                                    .map(key => key === 'T' ? '✓' : (key === 'F' ? '✗' : key))
+                                    .join('、')
+                                    }}
+                                </template>
+                                <template v-else>
+                                    {{ currentQuestion.answer.join('、') }}
+                                </template>
+                            </div>
                         </div>
 
                         <!-- 解析折叠区 -->
@@ -201,7 +212,11 @@
                         <div class="next-action">
                             <button class="btn btn-primary btn-next" @click="nextQuestion">
                                 {{ hasMoreQuestions ? '下一题' : '查看报告' }}
-                                <span class="btn-arrow"><svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"></path></svg></span>
+                                <span class="btn-arrow"><svg width="12" height="12" viewBox="0 0 12 12"
+                                        fill="currentColor">
+                                        <path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.5"
+                                            fill="none" stroke-linecap="round"></path>
+                                    </svg></span>
                             </button>
                         </div>
                     </div>
@@ -252,11 +267,11 @@
                             <div class="stat-label">总正确率</div>
                         </div>
                         <div class="stat-card">
-                            <div class="stat-value">{{ reportData.basicAccuracy }}%</div>
+                            <div class="stat-value">{{ reportData.L1Accuracy }}%</div>
                             <div class="stat-label">基础题正确率</div>
                         </div>
                         <div class="stat-card">
-                            <div class="stat-value">{{ reportData.advancedAccuracy }}%</div>
+                            <div class="stat-value">{{ reportData.L2Accuracy }}%</div>
                             <div class="stat-label">进阶题正确率</div>
                         </div>
                     </div>
@@ -339,10 +354,11 @@
         </div>
 
         <!-- 庆祝效果弹窗 -->
-        <div v-if="showCelebration" class="celebration-overlay" :class="celebrationType" @click="closeCelebration">
+        <div v-if="showCelebration" class="celebration-overlay"
+            :class="[celebrationType, { closing: celebrationClosing }]" @click="closeCelebration">
             <!-- 彩带/星星粒子效果 -->
             <div class="celebration-particles">
-                <div v-for="n in (celebrationType === 'major' ? 50 : 20)" :key="n" class="particle" :style="{ 
+                <div v-for="n in (celebrationType === 'major' ? 200 : 80)" :key="n" class="particle" :style="{ 
                     '--delay': Math.random() * 2 + 's',
                     '--x': (Math.random() * 100) + '%',
                     '--duration': (Math.random() * 2 + 2) + 's',
@@ -371,7 +387,19 @@
     </div>
 
     <!-- 引入JS模块 -->
+    <!-- 1. 类别与考点配置（必须最先加载） -->
+    <script src="js/question-config.js"></script>
+
+    <!-- 2. 分类题库（按需添加新类别） -->
+    <script src="js/data/preposition.js"></script>
+    <script src="js/data/particle.js"></script>
+    <script src="js/data/conjunction.js"></script>
+    <script src="js/data/modal.js"></script>
+
+    <!-- 3. 题库加载器（合并所有题库） -->
     <script src="js/questions.js"></script>
+
+    <!-- 4. 核心功能模块 -->
     <script src="js/adaptive-engine.js"></script>
     <script src="js/report-generator.js"></script>
     <script src="js/app.js"></script>

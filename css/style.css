@@ -219,12 +219,12 @@ strong {
     margin-right: var(--spacing-xs);
 }
 
-.badge.basic {
+.badge.L1 {
     background-color: var(--info-bg);
     color: var(--info-color);
 }
 
-.badge.advanced {
+.badge.L2 {
     background-color: var(--accent-light);
     color: var(--primary-dark);
 }
@@ -407,12 +407,12 @@ strong {
     transition: all 300ms var(--smooth);
 }
 
-.level-badge.basic {
+.level-badge.L1 {
     background-color: var(--info-bg);
     color: var(--info-color);
 }
 
-.level-badge.advanced {
+.level-badge.L2 {
     background-color: var(--accent-light);
     color: var(--primary-dark);
     animation: levelUp 400ms var(--bounce);
@@ -517,18 +517,6 @@ strong {
 .type-badge {
     background-color: var(--primary-bg);
     color: var(--primary-color);
-}
-
-.type-badge.single::before {
-    content: "单选";
-}
-
-.type-badge.multiple::before {
-    content: "多选";
-}
-
-.type-badge.judgment::before {
-    content: "判断";
 }
 
 .category-badge {
@@ -1462,6 +1450,36 @@ strong {
 
     to {
         opacity: 1;
+    }
+}
+
+.celebration-overlay.closing {
+    animation: celebrationFadeOut 300ms ease forwards;
+}
+
+.celebration-overlay.closing .celebration-content {
+    animation: celebrationContentOut 300ms ease forwards;
+}
+
+@keyframes celebrationFadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes celebrationContentOut {
+    from {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    to {
+        transform: scale(0.8);
+        opacity: 0;
     }
 }
 

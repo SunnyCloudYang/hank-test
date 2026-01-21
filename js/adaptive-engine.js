@@ -11,16 +11,22 @@
 const AdaptiveEngine = {
     // 难度配置
     config: {
-        initialLevel: 'basic',
-        upgradeThreshold: 3,      // 连续答对3道基础题升级
-        downgradeThreshold: 2     // 累计答错2道进阶题降级
+        initialLevel: 'L1',
+        upgradeThreshold: 3,      // 连续答对3道L1题升级
+        downgradeThreshold: 2     // 累计答错2道L2题降级
+    },
+
+    // 难度显示名称映射
+    levelNames: {
+        'L1': '基础题',
+        'L2': '进阶题'
     },
 
     // 当前状态
     state: {
-        currentLevel: 'basic',
-        consecutiveCorrect: 0,    // 基础题连续正确数
-        advancedWrongCount: 0,    // 进阶题错误计数
+        currentLevel: 'L1',
+        consecutiveCorrect: 0,    // L1题连续正确数
+        advancedWrongCount: 0,    // L2题错误计数
         answeredIds: [],          // 已答题目ID列表
         levelHistory: []          // 难度变化历史
     },
@@ -45,7 +51,7 @@ const AdaptiveEngine = {
 
     /**
      * 获取当前难度
-     * @returns {string} 'basic' 或 'advanced'
+     * @returns {string} 'L1' 或 'L2'
      */
     getCurrentLevel() {
         return this.state.currentLevel;
@@ -90,7 +96,7 @@ const AdaptiveEngine = {
         };
 
         // 根据当前难度处理
-        if (this.state.currentLevel === 'basic') {
+        if (this.state.currentLevel === 'L1') {
             result.levelChanged = this._processBasicAnswer(isCorrect, result);
         } else {
             result.levelChanged = this._processAdvancedAnswer(isCorrect, result);
@@ -109,7 +115,7 @@ const AdaptiveEngine = {
     },
 
     /**
-     * 处理基础题答案
+     * 处理L1题答案
      * @private
      */
     _processBasicAnswer(isCorrect, result) {
@@ -118,23 +124,23 @@ const AdaptiveEngine = {
             
             // 检查是否达到升级条件
             if (this.state.consecutiveCorrect >= this.config.upgradeThreshold) {
-                this.state.currentLevel = 'advanced';
+                this.state.currentLevel = 'L2';
                 this.state.consecutiveCorrect = 0;
-                this.state.advancedWrongCount = 0;  // 重置进阶题错误计数
+                this.state.advancedWrongCount = 0;  // 重置L2题错误计数
                 
-                result.newLevel = 'advanced';
-                result.reason = `连续答对${this.config.upgradeThreshold}道基础题，升级为进阶题`;
+                result.newLevel = 'L2';
+                result.reason = `连续答对${this.config.upgradeThreshold}道L1题，升级为L2题`;
                 return true;
             }
         } else {
-            // 答错基础题，重置连续正确计数
+            // 答错L1题，重置连续正确计数
             this.state.consecutiveCorrect = 0;
         }
         return false;
     },
 
     /**
-     * 处理进阶题答案
+     * 处理L2题答案
      * @private
      */
     _processAdvancedAnswer(isCorrect, result) {
@@ -143,12 +149,12 @@ const AdaptiveEngine = {
             
             // 检查是否达到降级条件
             if (this.state.advancedWrongCount >= this.config.downgradeThreshold) {
-                this.state.currentLevel = 'basic';
+                this.state.currentLevel = 'L1';
                 this.state.advancedWrongCount = 0;
-                this.state.consecutiveCorrect = 0;  // 重置基础题连续正确计数
+                this.state.consecutiveCorrect = 0;  // 重置L1题连续正确计数
                 
-                result.newLevel = 'basic';
-                result.reason = `答错${this.config.downgradeThreshold}道进阶题，降级为基础题`;
+                result.newLevel = 'L1';
+                result.reason = `答错${this.config.downgradeThreshold}道L2题，降级为L1题`;
                 return true;
             }
         }
@@ -171,7 +177,7 @@ const AdaptiveEngine = {
 
         if (availableQuestions.length === 0) {
             // 当前难度无题目，尝试获取另一难度的题目
-            const otherLevel = currentLevel === 'basic' ? 'advanced' : 'basic';
+            const otherLevel = currentLevel === 'L1' ? 'L2' : 'L1';
             const otherQuestions = questions.filter(q => 
                 q.level === otherLevel && 
                 !this.state.answeredIds.includes(q.id)
@@ -182,7 +188,7 @@ const AdaptiveEngine = {
                 this.state.currentLevel = otherLevel;
                 this.state.levelHistory.push({
                     level: otherLevel,
-                    reason: `${currentLevel === 'basic' ? '基础' : '进阶'}题已做完，自动切换`,
+                    reason: `${this.levelNames[currentLevel]}已做完，自动切换`,
                     timestamp: new Date().toISOString()
                 });
                 return this._randomSelect(otherQuestions);
@@ -209,19 +215,19 @@ const AdaptiveEngine = {
      * @returns {object} 剩余题目数量统计
      */
     getRemainingCount(questions) {
-        const basicRemaining = questions.filter(q => 
-            q.level === 'basic' && !this.state.answeredIds.includes(q.id)
+        const L1Remaining = questions.filter(q => 
+            q.level === 'L1' && !this.state.answeredIds.includes(q.id)
         ).length;
         
-        const advancedRemaining = questions.filter(q => 
-            q.level === 'advanced' && !this.state.answeredIds.includes(q.id)
+        const L2Remaining = questions.filter(q => 
+            q.level === 'L2' && !this.state.answeredIds.includes(q.id)
         ).length;
 
         return {
-            basic: basicRemaining,
-            advanced: advancedRemaining,
-            total: basicRemaining + advancedRemaining,
-            currentLevel: this.state.currentLevel === 'basic' ? basicRemaining : advancedRemaining
+            L1: L1Remaining,
+            L2: L2Remaining,
+            total: L1Remaining + L2Remaining,
+            currentLevel: this.state.currentLevel === 'L1' ? L1Remaining : L2Remaining
         };
     },
 
@@ -244,13 +250,22 @@ const AdaptiveEngine = {
             consecutiveCorrect: this.state.consecutiveCorrect,
             advancedWrongCount: this.state.advancedWrongCount,
             answeredCount: this.state.answeredIds.length,
-            upgradeProgress: this.state.currentLevel === 'basic' 
+            upgradeProgress: this.state.currentLevel === 'L1' 
                 ? `${this.state.consecutiveCorrect}/${this.config.upgradeThreshold}`
                 : null,
-            downgradeProgress: this.state.currentLevel === 'advanced'
+            downgradeProgress: this.state.currentLevel === 'L2'
                 ? `${this.state.advancedWrongCount}/${this.config.downgradeThreshold}`
                 : null
         };
+    },
+
+    /**
+     * 获取难度显示名称
+     * @param {string} level - 难度级别 (L1/L2)
+     * @returns {string} 中文名称
+     */
+    getLevelName(level) {
+        return this.levelNames[level] || level;
     }
 };
 
