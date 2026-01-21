@@ -52,7 +52,7 @@
                     <button class="btn btn-primary btn-large" @click="startPractice">
                         开始练习
                     </button>
-                    <p class="tip">题库共 {{ totalQuestions }} 道题目</p>
+                    <p class="tip">题库共 {{ totalQuestions }} 道题目，每次测试 {{ sessionLimit }} 题</p>
                 </div>
             </div>
         </div>
@@ -67,7 +67,7 @@
                             {{ currentLevel === 'L1' ? '基础' : '进阶' }}
                         </span>
                         <span class="question-count">
-                            第 {{ answeredCount + 1 }} / {{ totalQuestions }} 题
+                            第 {{ answeredCount + 1 }} / {{ sessionLimit }} 题
                         </span>
                     </div>
                     <div class="header-right">

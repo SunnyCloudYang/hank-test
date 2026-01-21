@@ -13,6 +13,9 @@ const { createApp, ref, computed, reactive, onMounted, watch } = Vue;
 // localStorage 键名
 const STORAGE_KEY = 'xuci_practice_session';
 
+// 每次测试的题目数量限制
+const SESSION_QUESTION_LIMIT = 30;
+
 // 创建 Vue 应用
 const app = createApp({
     setup() {
@@ -52,9 +55,14 @@ const app = createApp({
         const reportData = ref({});
 
         // ========== 计算属性 ==========
+        const sessionLimit = computed(() => {
+            // 如果题库总数少于限制，则使用题库总数
+            return Math.min(SESSION_QUESTION_LIMIT, totalQuestions.value);
+        });
+
         const progressPercent = computed(() => {
-            if (totalQuestions.value === 0) return 0;
-            return Math.round((answeredCount.value / totalQuestions.value) * 100);
+            if (sessionLimit.value === 0) return 0;
+            return Math.round((answeredCount.value / sessionLimit.value) * 100);
         });
 
         const questionTypeLabel = computed(() => {
@@ -79,6 +87,10 @@ const app = createApp({
         });
 
         const hasMoreQuestions = computed(() => {
+            // 达到本次测试题目上限时结束
+            if (answeredCount.value >= sessionLimit.value) {
+                return false;
+            }
             return AdaptiveEngine.hasMoreQuestions(questions.value);
         });
 
@@ -399,6 +411,7 @@ const app = createApp({
             // 题库
             questions,
             totalQuestions,
+            sessionLimit,
 
             // 练习状态
             currentQuestion,
