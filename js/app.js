@@ -31,6 +31,11 @@ const app = createApp({
         const isCorrect = ref(false);
         const showPauseModal = ref(false);
 
+        // ========== 连续答对与庆祝效果 ==========
+        const consecutiveCorrect = ref(0);
+        const showCelebration = ref(false);
+        const celebrationType = ref(''); // 'minor' | 'major'
+
         // ========== 答题记录 ==========
         const session = reactive({
             sessionId: '',
@@ -86,6 +91,9 @@ const app = createApp({
             session.sessionId = generateSessionId();
             session.startTime = new Date().toISOString();
             session.records = [];
+
+            // 重置连续答对计数
+            consecutiveCorrect.value = 0;
 
             // 初始化自适应引擎
             AdaptiveEngine.init();
@@ -169,11 +177,53 @@ const app = createApp({
             const result = AdaptiveEngine.processAnswer(q.id, isCorrect.value, q.level);
             currentLevel.value = AdaptiveEngine.getCurrentLevel();
 
+            // 更新连续答对计数并检查庆祝效果
+            if (isCorrect.value) {
+                consecutiveCorrect.value++;
+                checkCelebration();
+            } else {
+                consecutiveCorrect.value = 0;
+            }
+
             // 显示反馈
             showFeedback.value = true;
 
             // 保存到 localStorage
             saveSession();
+        }
+
+        /**
+         * 检查是否触发庆祝效果
+         */
+        function checkCelebration() {
+            if (consecutiveCorrect.value === 10) {
+                // Major celebration: 10 consecutive correct
+                triggerCelebration('major');
+            } else if (consecutiveCorrect.value === 5) {
+                // Minor celebration: 5 consecutive correct
+                triggerCelebration('minor');
+            }
+        }
+
+        /**
+         * 触发庆祝效果
+         */
+        function triggerCelebration(type) {
+            celebrationType.value = type;
+            showCelebration.value = true;
+            
+            // 自动关闭庆祝效果
+            const duration = type === 'major' ? 4000 : 2500;
+            setTimeout(() => {
+                showCelebration.value = false;
+            }, duration);
+        }
+
+        /**
+         * 关闭庆祝效果
+         */
+        function closeCelebration() {
+            showCelebration.value = false;
         }
 
         /**
@@ -219,6 +269,7 @@ const app = createApp({
             session.records = [];
             currentQuestion.value = null;
             reportData.value = {};
+            consecutiveCorrect.value = 0;
             
             // 返回欢迎页
             currentPage.value = 'welcome';
@@ -353,6 +404,11 @@ const app = createApp({
             currentLevel,
             answeredCount,
             
+            // 庆祝效果
+            consecutiveCorrect,
+            showCelebration,
+            celebrationType,
+            
             // 计算属性
             progressPercent,
             questionTypeLabel,
@@ -373,7 +429,8 @@ const app = createApp({
             restartPractice,
             downloadReport,
             getAccuracyClass,
-            getCategoryName
+            getCategoryName,
+            closeCelebration
         };
     }
 });

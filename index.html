@@ -18,7 +18,6 @@
             <div class="container">
                 <header class="welcome-header">
                     <h1 class="title">现代汉语虚词练习平台</h1>
-                    <p class="subtitle">面向中文教育专业本科生的自适应学习系统</p>
                 </header>
 
                 <section class="intro-section">
@@ -160,26 +159,49 @@
                         <div class="feedback-header">
                             <span class="feedback-icon">{{ isCorrect ? '✓' : '✗' }}</span>
                             <span class="feedback-text">{{ isCorrect ? '回答正确！' : '回答错误' }}</span>
+                            <span v-if="consecutiveCorrect > 1 && isCorrect" class="streak-badge">
+                                🔥 {{ consecutiveCorrect }} 连对
+                            </span>
                         </div>
 
-                        <div class="feedback-answer">
-                            <strong>正确答案：</strong>{{ currentQuestion.answer.join('、') }}
+                        <!-- 正确答案卡片 -->
+                        <div class="answer-card">
+                            <div class="answer-label">正确答案</div>
+                            <div class="answer-value">{{ currentQuestion.answer.join('、') }}</div>
                         </div>
 
                         <!-- 解析折叠区 -->
-                        <div class="analysis-section">
+                        <div class="analysis-section" :class="{ 'expanded': showAnalysis }">
                             <button class="analysis-toggle" @click="showAnalysis = !showAnalysis">
-                                {{ showAnalysis ? '收起解析 ▲' : '查看解析 ▼' }}
+                                <span class="toggle-icon">💡</span>
+                                <span class="toggle-text">{{ showAnalysis ? '收起解析' : '查看解析' }}</span>
+                                <span class="toggle-arrow" :class="{ 'rotated': showAnalysis }">
+                                    <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
+                                        <path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.5"
+                                            fill="none" stroke-linecap="round" />
+                                    </svg>
+                                </span>
                             </button>
                             <div v-if="showAnalysis" class="analysis-content">
-                                <p>{{ currentQuestion.analysis }}</p>
+                                <div class="analysis-header">
+                                    <span class="analysis-icon">📖</span>
+                                    <span class="analysis-title">解析说明</span>
+                                </div>
+                                <div class="analysis-body">
+                                    <p>{{ currentQuestion.analysis }}</p>
+                                </div>
+                                <div class="analysis-tag">
+                                    <span class="tag-label">考点：</span>
+                                    <span class="tag-value">{{ currentQuestion.tag }}</span>
+                                </div>
                             </div>
                         </div>
 
                         <!-- 下一题按钮 -->
                         <div class="next-action">
-                            <button class="btn btn-primary" @click="nextQuestion">
+                            <button class="btn btn-primary btn-next" @click="nextQuestion">
                                 {{ hasMoreQuestions ? '下一题' : '查看报告' }}
+                                <span class="btn-arrow"><svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"></path></svg></span>
                             </button>
                         </div>
                     </div>
@@ -312,6 +334,37 @@
                     <button class="btn btn-outline btn-large" @click="downloadReport">
                         保存为 PDF
                     </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 庆祝效果弹窗 -->
+        <div v-if="showCelebration" class="celebration-overlay" :class="celebrationType" @click="closeCelebration">
+            <!-- 彩带/星星粒子效果 -->
+            <div class="celebration-particles">
+                <div v-for="n in (celebrationType === 'major' ? 50 : 20)" :key="n" class="particle" :style="{ 
+                    '--delay': Math.random() * 2 + 's',
+                    '--x': (Math.random() * 100) + '%',
+                    '--duration': (Math.random() * 2 + 2) + 's',
+                    '--size': (Math.random() * 10 + 5) + 'px'
+                }"></div>
+            </div>
+
+            <!-- 庆祝内容 -->
+            <div class="celebration-content">
+                <div class="celebration-icon">
+                    {{ celebrationType === 'major' ? '🏆' : '⭐' }}
+                </div>
+                <h2 class="celebration-title">
+                    {{ celebrationType === 'major' ? '太棒了！' : '做得好！' }}
+                </h2>
+                <p class="celebration-message">
+                    {{ celebrationType === 'major'
+                    ? '连续答对 10 题！你是虚词大师！'
+                    : '连续答对 5 题！继续保持！' }}
+                </p>
+                <div class="celebration-streak">
+                    🔥 {{ consecutiveCorrect }} 连胜
                 </div>
             </div>
         </div>
