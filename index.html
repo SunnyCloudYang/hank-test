@@ -305,19 +305,33 @@
                         <p>🎉 恭喜！本次练习未发现明显薄弱点。</p>
                     </div>
                     <div v-else class="weakness-list">
-                        <div v-for="(point, index) in reportData.weakPoints" :key="index" class="weakness-item">
-                            <div class="weakness-header">
-                                <span class="weakness-category">{{ getCategoryName(point.category) }}</span>
-                                <span class="weakness-tag">{{ point.tag }}</span>
+                        <!-- 按虚词类别分组显示 -->
+                        <div v-for="(group, groupIndex) in reportData.weakPoints" :key="groupIndex" class="weakness-group">
+                            <div class="weakness-group-header">
+                                <span class="weakness-group-title">{{ group.categoryName }}</span>
+                                <span class="weakness-group-count">{{ group.points.length }} 个薄弱点</span>
                             </div>
-                            <div class="weakness-stats">
-                                <span class="error-count">错误 {{ point.wrongCount }} 次 / 共 {{ point.totalCount }}
-                                    题</span>
-                                <span class="error-rate">错误率 {{ point.errorRate }}%</span>
-                            </div>
-                            <div class="weakness-detail">
-                                <p>{{ point.description }}</p>
-                            </div>
+                            <table class="weakness-table">
+                                <thead>
+                                    <tr>
+                                        <th class="col-tag">考点</th>
+                                        <th class="col-stats">答题情况</th>
+                                        <th class="col-rate">错误率</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="(point, index) in group.points" :key="index" class="weakness-row">
+                                        <td class="col-tag">
+                                            <span class="weakness-tag">{{ point.tag.split('/')[1] }}</span>
+                                            <p class="weakness-desc">{{ point.description }}</p>
+                                        </td>
+                                        <td class="col-stats">{{ point.wrongCount }} / {{ point.totalCount }}</td>
+                                        <td class="col-rate">
+                                            <span class="error-rate-badge">{{ point.errorRate }}%</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </section>

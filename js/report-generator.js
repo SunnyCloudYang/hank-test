@@ -22,16 +22,16 @@ const ReportGenerator = {
         const report = {
             // 生成时间
             generatedTime: this._formatDateTime(new Date()),
-            
+
             // 基础统计
             ...this._calculateBasicStats(records),
-            
+
             // 类别分析
             categoryAnalysis: this._analyzeCategoryPerformance(records),
-            
+
             // 薄弱点定位
             weakPoints: this._identifyWeakPoints(records),
-            
+
             // 学习建议
             suggestions: this._generateSuggestions(records)
         };
@@ -46,11 +46,11 @@ const ReportGenerator = {
     _calculateBasicStats(records) {
         const totalCount = records.length;
         const correctCount = records.filter(r => r.isCorrect).length;
-        
+
         // 按难度统计 (L1=基础, L2=进阶)
         const L1Records = records.filter(r => r.level === 'L1');
         const L2Records = records.filter(r => r.level === 'L2');
-        
+
         const L1Correct = L1Records.filter(r => r.isCorrect).length;
         const L2Correct = L2Records.filter(r => r.isCorrect).length;
 
@@ -80,7 +80,7 @@ const ReportGenerator = {
             const categoryRecords = records.filter(r => r.category === category);
             const correct = categoryRecords.filter(r => r.isCorrect).length;
             const total = categoryRecords.length;
-            
+
             analysis[category] = {
                 total,
                 correct,
@@ -93,13 +93,13 @@ const ReportGenerator = {
     },
 
     /**
-     * 识别薄弱点（按考点tag聚合）
+     * 识别薄弱点（按考点tag聚合，并按类别分组）
      * @private
      */
     _identifyWeakPoints(records) {
         // 按tag聚合错误
         const tagStats = {};
-        
+
         records.forEach(record => {
             const tag = record.tag;
             if (!tagStats[tag]) {
@@ -129,7 +129,42 @@ const ReportGenerator = {
             }))
             .sort((a, b) => b.errorRate - a.errorRate); // 按错误率降序
 
-        return weakPoints;
+        // 按类别分组
+        const groupedByCategory = this._groupWeakPointsByCategory(weakPoints);
+
+        return groupedByCategory;
+    },
+
+    /**
+     * 将薄弱点按虚词类别分组
+     * @private
+     */
+    _groupWeakPointsByCategory(weakPoints) {
+        const categoryOrder = ['preposition', 'particle', 'conjunction', 'modal'];
+        const grouped = {};
+
+        // 初始化所有类别
+        categoryOrder.forEach(cat => {
+            grouped[cat] = [];
+        });
+
+        // 按类别分组
+        weakPoints.forEach(point => {
+            if (grouped[point.category]) {
+                grouped[point.category].push(point);
+            }
+        });
+
+        // 转换为数组格式，只保留有薄弱点的类别
+        const result = categoryOrder
+            .filter(cat => grouped[cat].length > 0)
+            .map(cat => ({
+                category: cat,
+                categoryName: this._getCategoryName(cat),
+                points: grouped[cat]
+            }));
+
+        return result;
     },
 
     /**
@@ -137,15 +172,17 @@ const ReportGenerator = {
      * @private
      */
     _generateSuggestions(records) {
-        const weakPoints = this._identifyWeakPoints(records);
+        const weakPointsGrouped = this._identifyWeakPoints(records);
         const suggestions = [];
 
-        // 根据薄弱点生成建议
-        weakPoints.forEach(point => {
-            const suggestion = this._getSuggestionForTag(point.tag);
-            if (suggestion && !suggestions.find(s => s.title === suggestion.title)) {
-                suggestions.push(suggestion);
-            }
+        // 从分组的薄弱点中提取所有点生成建议
+        weakPointsGrouped.forEach(group => {
+            group.points.forEach(point => {
+                const suggestion = this._getSuggestionForTag(point.tag);
+                if (suggestion && !suggestions.find(s => s.title === suggestion.title)) {
+                    suggestions.push(suggestion);
+                }
+            });
         });
 
         // 如果没有明显薄弱点，给出通用建议
@@ -169,7 +206,7 @@ const ReportGenerator = {
         Object.entries(categoryAnalysis).forEach(([category, data]) => {
             if (data.total >= 2 && data.accuracy < 60) {
                 const categoryName = this._getCategoryName(category);
-                const existingSuggestion = suggestions.find(s => 
+                const existingSuggestion = suggestions.find(s =>
                     s.title.includes(categoryName)
                 );
                 if (!existingSuggestion) {
@@ -189,7 +226,7 @@ const ReportGenerator = {
      * @private
      */
     _getTagDescription(tag) {
-        return window.TAG_DESCRIPTIONS && window.TAG_DESCRIPTIONS[tag] 
+        return window.TAG_DESCRIPTIONS && window.TAG_DESCRIPTIONS[tag]
             ? window.TAG_DESCRIPTIONS[tag]
             : `"${tag}"相关知识点需要加强练习。`;
     },
@@ -319,11 +356,16 @@ const ReportGenerator = {
         if (report.weakPoints.length === 0) {
             text += '恭喜！本次练习未发现明显薄弱点。\n';
         } else {
-            report.weakPoints.forEach((point, index) => {
-                text += `${index + 1}. ${this._getCategoryName(point.category)} - ${point.tag}\n`;
-                text += `   错误 ${point.wrongCount}/${point.totalCount} 题（错误率 ${point.errorRate}%）\n`;
-                text += `   ${point.description}\n\n`;
+            // 按类别分组显示薄弱点
+            report.weakPoints.forEach(group => {
+                text += `\n◆ ${group.categoryName}\n`;
+                group.points.forEach((point, index) => {
+                    text += `  ${index + 1}. ${point.tag}\n`;
+                    text += `     错误 ${point.wrongCount}/${point.totalCount} 题（错误率 ${point.errorRate}%）\n`;
+                    text += `     ${point.description}\n`;
+                });
             });
+            text += '\n';
         }
 
         // 学习建议

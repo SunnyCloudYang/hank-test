@@ -1314,57 +1314,114 @@ strong {
     gap: var(--spacing-md);
 }
 
-.weakness-item {
-    padding: var(--spacing-md);
-    background-color: var(--error-bg);
+/* Weakness Group - 按类别分组 */
+.weakness-group {
+    background-color: var(--bg-primary);
     border-radius: var(--radius-md);
-    border-left: 4px solid var(--error-color);
+    padding: var(--spacing-md);
+    animation: sectionFadeUp 400ms var(--smooth) backwards;
 }
 
-.weakness-header {
+.weakness-group:nth-child(1) { animation-delay: 100ms; }
+.weakness-group:nth-child(2) { animation-delay: 200ms; }
+.weakness-group:nth-child(3) { animation-delay: 300ms; }
+.weakness-group:nth-child(4) { animation-delay: 400ms; }
+
+.weakness-group-header {
     display: flex;
     align-items: center;
-    gap: var(--spacing-sm);
+    justify-content: space-between;
+    padding-bottom: var(--spacing-xs);
     margin-bottom: var(--spacing-sm);
+    border-bottom: 2px solid var(--error-color);
 }
 
-.weakness-category {
-    padding: 2px 8px;
-    background-color: var(--bg-secondary);
-    border-radius: var(--radius-sm);
+.weakness-group-title {
+    font-size: var(--font-size-base);
+    font-weight: 600;
+    color: var(--primary-dark);
+}
+
+.weakness-group-count {
     font-size: var(--font-size-sm);
+    color: var(--error-color);
+    font-weight: 500;
+}
+
+/* Weakness Table - 紧凑表格布局 */
+.weakness-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--font-size-sm);
+}
+
+.weakness-table thead {
+    background-color: rgba(0, 0, 0, 0.03);
+}
+
+.weakness-table th {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    text-align: left;
+    font-weight: 500;
+    color: var(--text-muted);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.weakness-table td {
+    padding: var(--spacing-sm);
+    vertical-align: top;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.weakness-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.weakness-table .col-tag {
+    width: auto;
+}
+
+.weakness-table .col-stats {
+    width: 80px;
+    text-align: center;
     color: var(--text-secondary);
+    white-space: nowrap;
+}
+
+.weakness-table .col-rate {
+    width: 70px;
+    text-align: center;
+}
+
+.weakness-row:hover {
+    background-color: rgba(193, 18, 31, 0.03);
 }
 
 .weakness-tag {
     font-weight: 600;
     color: var(--error-color);
+    display: block;
+    margin-bottom: 2px;
 }
 
-.weakness-stats {
-    display: flex;
-    gap: var(--spacing-md);
-    margin-bottom: var(--spacing-sm);
-    font-size: var(--font-size-sm);
+.weakness-desc {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin: 0;
+    line-height: 1.4;
 }
 
-.error-count {
-    color: var(--text-secondary);
-}
-
-.error-rate {
+.error-rate-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    background-color: var(--error-bg);
     color: var(--error-color);
+    border-radius: var(--radius-sm);
     font-weight: 600;
-}
-
-.weakness-detail {
-    font-size: var(--font-size-sm);
-    color: var(--text-primary);
-    line-height: 1.6;
-}
-
-.weakness-detail p {
-    margin-bottom: 0;
+    font-size: 12px;
 }
 
 /* Suggestion Section */
@@ -1666,6 +1723,24 @@ strong {
         font-size: var(--font-size-sm);
     }
 
+    /* Weakness table responsive */
+    .weakness-table .col-stats {
+        width: 60px;
+    }
+
+    .weakness-table .col-rate {
+        width: 55px;
+    }
+
+    .weakness-table th,
+    .weakness-table td {
+        padding: var(--spacing-xs);
+    }
+
+    .weakness-desc {
+        font-size: 11px;
+    }
+
     .modal-actions {
         flex-direction: column;
     }
@@ -1811,13 +1886,36 @@ strong {
         background-color: #c1121f !important;
     }
 
-    /* Weakness items */
-    .weakness-item {
-        background-color: #ffccd5 !important;
-        border-left-color: #c1121f !important;
+    /* Weakness groups and table */
+    .weakness-group {
+        background-color: #f8f9fa !important;
+        border: 1px solid #dee2e6;
+        animation: none !important;
+    }
+
+    .weakness-group-header {
+        border-bottom-color: #c1121f !important;
+    }
+
+    .weakness-group-title {
+        color: #1b4332 !important;
+    }
+
+    .weakness-table {
+        border: 1px solid #dee2e6;
+    }
+
+    .weakness-table th,
+    .weakness-table td {
+        border: 1px solid #dee2e6 !important;
     }
 
     .weakness-tag {
+        color: #c1121f !important;
+    }
+
+    .error-rate-badge {
+        background-color: #ffccd5 !important;
         color: #c1121f !important;
     }
 
