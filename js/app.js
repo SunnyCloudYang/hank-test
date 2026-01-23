@@ -14,7 +14,7 @@ const { createApp, ref, computed, reactive, onMounted, watch } = Vue;
 const STORAGE_KEY = 'xuci_practice_session';
 
 // 每次测试的题目数量限制
-const SESSION_QUESTION_LIMIT = 30;
+const SESSION_QUESTION_LIMIT = 35;
 
 // 创建 Vue 应用
 const app = createApp({
