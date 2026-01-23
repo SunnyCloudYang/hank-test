@@ -11,6 +11,21 @@
  * - options: 选项数组 (判断题可省略)
  * - answer: 正确答案数组
  * - analysis: 解析说明
+ * - fixed: 可选，设为 true 表示该题为固定题目，将在每次练习开始时优先展示
+ * 
+ * 固定题目示例：
+ * {
+ *     id: 'conjunction_L1_001',
+ *     type: 'single',
+ *     level: 'L1',
+ *     category: 'conjunction',
+ *     tag: '连词/词类识别',
+ *     stem: '...',
+ *     options: [...],
+ *     answer: ['A'],
+ *     analysis: '...',
+ *     fixed: true  // 标记为固定题目
+ * }
  */
 
 const CONJUNCTION_QUESTIONS = [
@@ -28,7 +43,8 @@ const CONJUNCTION_QUESTIONS = [
             { key: 'D', text: '非常' }
         ],
         answer: ['A'],
-        analysis: '“因为”起连接作用，表示原因，是连词。'
+        analysis: '“因为”起连接作用，表示原因，是连词。',
+        fixed: true
     },
 
     {

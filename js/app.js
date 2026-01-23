@@ -108,8 +108,8 @@ const app = createApp({
             // 重置连续答对计数
             consecutiveCorrect.value = 0;
 
-            // 初始化自适应引擎
-            AdaptiveEngine.init();
+            // 初始化自适应引擎（传入题库以初始化固定题目队列）
+            AdaptiveEngine.init(questions.value);
             currentLevel.value = AdaptiveEngine.getCurrentLevel();
 
             // 获取第一道题
@@ -186,8 +186,8 @@ const app = createApp({
             };
             session.records.push(record);
 
-            // 处理自适应逻辑
-            const result = AdaptiveEngine.processAnswer(q.id, isCorrect.value, q.level);
+            // 处理自适应逻辑（传入类别用于追踪同类别错误）
+            const result = AdaptiveEngine.processAnswer(q.id, isCorrect.value, q.level, q.category);
             currentLevel.value = AdaptiveEngine.getCurrentLevel();
 
             // 更新连续答对计数并检查庆祝效果
