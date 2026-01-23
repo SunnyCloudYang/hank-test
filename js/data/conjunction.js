@@ -29,6 +29,7 @@
  */
 
 const CONJUNCTION_QUESTIONS = [
+    // 连词 L1
     {
         id: 'conjunction_L1_001',
         type: 'single',
@@ -43,10 +44,9 @@ const CONJUNCTION_QUESTIONS = [
             { key: 'D', text: '非常' }
         ],
         answer: ['A'],
-        analysis: '“因为”起连接作用，表示原因，是连词。',
+        analysis: '"因为"起连接作用，表示原因，是连词。',
         fixed: true
     },
-
     {
         id: 'conjunction_L1_002',
         type: 'single',
@@ -61,16 +61,15 @@ const CONJUNCTION_QUESTIONS = [
             { key: 'D', text: '他非常认真' }
         ],
         answer: ['A'],
-        analysis: '“因为”连接原因和结果，是连词。'
+        analysis: '"因为"连接原因和结果，是连词。'
     },
-
     {
         id: 'conjunction_L1_003',
         type: 'single',
         level: 'L1',
         category: 'conjunction',
         tag: '连词/作用辨析',
-        stem: '句子“我想去，但是时间不够”中，“但是”表示（ ）',
+        stem: '句子"我想去，但是时间不够"中，"但是"表示（ ）',
         options: [
             { key: 'A', text: '并列关系' },
             { key: 'B', text: '选择关系' },
@@ -78,16 +77,15 @@ const CONJUNCTION_QUESTIONS = [
             { key: 'D', text: '因果关系' }
         ],
         answer: ['C'],
-        analysis: '“但是”表示前后意思相反或相对，表转折。'
+        analysis: '"但是"表示前后意思相反或相对，表转折。'
     },
-
     {
         id: 'conjunction_L1_004',
         type: 'single',
         level: 'L1',
         category: 'conjunction',
         tag: '连词/作用辨析',
-        stem: '“他努力学习，所以成绩很好”中，“所以”表示（ ）',
+        stem: '"他努力学习，所以成绩很好"中，"所以"表示（ ）',
         options: [
             { key: 'A', text: '并列' },
             { key: 'B', text: '因果' },
@@ -95,9 +93,8 @@ const CONJUNCTION_QUESTIONS = [
             { key: 'D', text: '条件' }
         ],
         answer: ['B'],
-        analysis: '“所以”引出结果，表示因果关系。'
+        analysis: '"所以"引出结果，表示因果关系。'
     },
-
     {
         id: 'conjunction_L1_005',
         type: 'single',
@@ -112,16 +109,15 @@ const CONJUNCTION_QUESTIONS = [
             { key: 'D', text: '往' }
         ],
         answer: ['A'],
-        analysis: '“但是”只能作连词，其余词语可兼作其他词类。'
+        analysis: '"但是"只能作连词，其余词语可兼作其他词类。'
     },
-
     {
         id: 'conjunction_L1_006',
         type: 'single',
         level: 'L1',
         category: 'conjunction',
         tag: '连词/作用辨析',
-        stem: '下列句子中，“和”用作连词的是（ ）',
+        stem: '下列句子中，"和"用作连词的是（ ）',
         options: [
             { key: 'A', text: '我和小明是同学' },
             { key: 'B', text: '他和我商量这件事' },
@@ -129,9 +125,8 @@ const CONJUNCTION_QUESTIONS = [
             { key: 'D', text: '他和过老师打招呼' }
         ],
         answer: ['A'],
-        analysis: 'A 中“和”连接两个名词，表示并列，是连词'
+        analysis: 'A 中"和"连接两个名词，表示并列，是连词'
     },
-
     {
         id: 'conjunction_L1_007',
         type: 'judgment',
@@ -160,7 +155,7 @@ const CONJUNCTION_QUESTIONS = [
         level: 'L1',
         category: 'conjunction',
         tag: '连词/作用辨析',
-        stem: '“或者”主要表示（ ）关系',
+        stem: '"或者"主要表示（ ）关系',
         options: [
             { key: 'A', text: '并列' },
             { key: 'B', text: '选择' },
@@ -168,16 +163,15 @@ const CONJUNCTION_QUESTIONS = [
             { key: 'D', text: '转折' }
         ],
         answer: ['B'],
-        analysis: '“或者”用于表示选择关系。'
+        analysis: '"或者"用于表示选择关系。'
     },
-
     {
         id: 'conjunction_L1_010',
         type: 'single',
         level: 'L1',
         category: 'conjunction',
         tag: '连词/作用辨析',
-        stem: '“虽然下雨，但是我们还是出发了”中，“虽然……但是……”表示（ ）',
+        stem: '"虽然下雨，但是我们还是出发了"中，"虽然……但是……"表示（ ）',
         options: [
             { key: 'A', text: '并列关系' },
             { key: 'B', text: '因果关系' },
@@ -185,7 +179,7 @@ const CONJUNCTION_QUESTIONS = [
             { key: 'D', text: '选择关系' }
         ],
         answer: ['C'],
-        analysis: '“虽然……但是……”是典型的让步转折结构。'
+        analysis: '"虽然……但是……"是典型的让步转折结构。'
     },
     {
         id: 'conjunction_L1_011',
@@ -193,7 +187,7 @@ const CONJUNCTION_QUESTIONS = [
         level: 'L1',
         category: 'conjunction',
         tag: '连词/词类识别',
-        stem: '下列句子中，“而且”用作连词的是（ ）',
+        stem: '下列句子中，"而且"用作连词的是（ ）',
         options: [
             { key: 'A', text: '他而且很努力' },
             { key: 'B', text: '他聪明而且勤奋' },
@@ -201,16 +195,15 @@ const CONJUNCTION_QUESTIONS = [
             { key: 'D', text: '他学习而且吃饭' }
         ],
         answer: ['B'],
-        analysis: '“而且”连接两个形容词性成分，表示递进，是连词。'
+        analysis: '"而且"连接两个形容词性成分，表示递进，是连词。'
     },
-
     {
         id: 'conjunction_L1_012',
         type: 'single',
         level: 'L1',
         category: 'conjunction',
         tag: '连词/作用辨析',
-        stem: '“他不但会英语，而且会法语”中，“而且”表示（ ）',
+        stem: '"他不但会英语，而且会法语"中，"而且"表示（ ）',
         options: [
             { key: 'A', text: '并列' },
             { key: 'B', text: '递进' },
@@ -218,7 +211,7 @@ const CONJUNCTION_QUESTIONS = [
             { key: 'D', text: '因果' }
         ],
         answer: ['B'],
-        analysis: '“不但……而且……”表示在原有基础上更进一步。'
+        analysis: '"不但……而且……"表示在原有基础上更进一步。'
     },
     {
         id: 'conjunction_L1_013',
@@ -231,7 +224,6 @@ const CONJUNCTION_QUESTIONS = [
         answer: ['T'],
         analysis: '连词通常位于连接对象之间，如词、短语或分句之间。'
     },
-
     {
         id: 'conjunction_L1_014',
         type: 'single',
@@ -246,16 +238,15 @@ const CONJUNCTION_QUESTIONS = [
             { key: 'D', text: '已经' }
         ],
         answer: ['D'],
-        analysis: '“已经”是副词，不是连词。'
+        analysis: '"已经"是副词，不是连词。'
     },
-
     {
         id: 'conjunction_L1_015',
         type: 'single',
         level: 'L1',
         category: 'conjunction',
         tag: '连词/作用辨析',
-        stem: '“如果下雨，我们就不去了”中，“如果”表示（ ）',
+        stem: '"如果下雨，我们就不去了"中，"如果"表示（ ）',
         options: [
             { key: 'A', text: '因果' },
             { key: 'B', text: '假设' },
@@ -263,7 +254,7 @@ const CONJUNCTION_QUESTIONS = [
             { key: 'D', text: '并列' }
         ],
         answer: ['B'],
-        analysis: '“如果”引出假设条件。'
+        analysis: '"如果"引出假设条件。'
     },
     {
         id: 'conjunction_L1_016',
@@ -276,14 +267,13 @@ const CONJUNCTION_QUESTIONS = [
         answer: ['T'],
         analysis: '连词不表示动作，不具备带动态助词的能力。'
     },
-
     {
         id: 'conjunction_L1_017',
         type: 'single',
         level: 'L1',
         category: 'conjunction',
         tag: '连词/作用辨析',
-        stem: '“他很想来，可是没时间”中，“可是”表示（ ）',
+        stem: '"他很想来，可是没时间"中，"可是"表示（ ）',
         options: [
             { key: 'A', text: '并列' },
             { key: 'B', text: '转折' },
@@ -291,7 +281,7 @@ const CONJUNCTION_QUESTIONS = [
             { key: 'D', text: '条件' }
         ],
         answer: ['B'],
-        analysis: '“可是”表示前后意思相对，属转折关系。'
+        analysis: '"可是"表示前后意思相对，属转折关系。'
     },
     {
         id: 'conjunction_L1_018',
@@ -299,7 +289,7 @@ const CONJUNCTION_QUESTIONS = [
         level: 'L1',
         category: 'conjunction',
         tag: '连词/词类识别',
-        stem: '下列句子中，“和”作连词的是（ ）',
+        stem: '下列句子中，"和"作连词的是（ ）',
         options: [
             { key: 'A', text: '我和他一起去' },
             { key: 'B', text: '他和我商量问题' },
@@ -307,9 +297,8 @@ const CONJUNCTION_QUESTIONS = [
             { key: 'D', text: '他和爸爸一样高了' }
         ],
         answer: ['A'],
-        analysis: '“和”连接两个名词性成分，表示并列。'
+        analysis: '"和"连接两个名词性成分，表示并列。'
     },
-
     {
         id: 'conjunction_L1_019',
         type: 'judgment',
@@ -327,7 +316,7 @@ const CONJUNCTION_QUESTIONS = [
         level: 'L1',
         category: 'conjunction',
         tag: '连词/作用辨析',
-        stem: '“不是你，就是我去”中，“不是……就是……”表示（ ）',
+        stem: '"不是你，就是我去"中，"不是……就是……"表示（ ）',
         options: [
             { key: 'A', text: '并列' },
             { key: 'B', text: '选择' },
@@ -335,7 +324,7 @@ const CONJUNCTION_QUESTIONS = [
             { key: 'D', text: '因果' }
         ],
         answer: ['B'],
-        analysis: '“不是……就是……”表示二选一的选择关系。'
+        analysis: '"不是……就是……"表示二选一的选择关系。'
     },
     {
         id: 'conjunction_L1_021',
@@ -351,7 +340,7 @@ const CONJUNCTION_QUESTIONS = [
             { key: 'D', text: '非常' }
         ],
         answer: ['A'],
-        analysis: '“然而”表示转折，是书面语常用连词。'
+        analysis: '"然而"表示转折，是书面语常用连词。'
     },
     {
         id: 'conjunction_L1_022',
@@ -362,7 +351,7 @@ const CONJUNCTION_QUESTIONS = [
         stem: '"因为……所以……"是一种常见的因果连词结构。',
         options: [],
         answer: ['T'],
-        analysis: '“因为”引出原因，“所以”引出结果。'
+        analysis: '"因为"引出原因，"所以"引出结果。'
     },
     {
         id: 'conjunction_L1_023',
@@ -370,7 +359,7 @@ const CONJUNCTION_QUESTIONS = [
         level: 'L1',
         category: 'conjunction',
         tag: '连词/作用辨析',
-        stem: '“他既聪明又努力”中，“既……又……”表示（ ）',
+        stem: '"他既聪明又努力"中，"既……又……"表示（ ）',
         options: [
             { key: 'A', text: '选择' },
             { key: 'B', text: '并列' },
@@ -378,7 +367,7 @@ const CONJUNCTION_QUESTIONS = [
             { key: 'D', text: '因果' }
         ],
         answer: ['B'],
-        analysis: '“既……又……”表示并列关系。'
+        analysis: '"既……又……"表示并列关系。'
     },
     {
         id: 'conjunction_L1_024',
@@ -413,7 +402,7 @@ const CONJUNCTION_QUESTIONS = [
         level: 'L1',
         category: 'conjunction',
         tag: '连词/作用辨析',
-        stem: '“不管刮风下雨，他都来”中，“不管”表示（ ）',
+        stem: '"不管刮风下雨，他都来"中，"不管"表示（ ）',
         options: [
             { key: 'A', text: '因果' },
             { key: 'B', text: '条件' },
@@ -421,7 +410,7 @@ const CONJUNCTION_QUESTIONS = [
             { key: 'D', text: '并列' }
         ],
         answer: ['B'],
-        analysis: '“不管”引出条件，表示在任何条件下结果不变。'
+        analysis: '"不管"引出条件，表示在任何条件下结果不变。'
     },
     {
         id: 'conjunction_L1_027',
@@ -440,7 +429,7 @@ const CONJUNCTION_QUESTIONS = [
         level: 'L1',
         category: 'conjunction',
         tag: '连词/作用辨析',
-        stem: '“除非下雨，否则比赛照常进行”中，“除非……否则……”表示（ ）',
+        stem: '"除非下雨，否则比赛照常进行"中，"除非……否则……"表示（ ）',
         options: [
             { key: 'A', text: '选择' },
             { key: 'B', text: '条件' },
@@ -448,7 +437,7 @@ const CONJUNCTION_QUESTIONS = [
             { key: 'D', text: '转折' }
         ],
         answer: ['B'],
-        analysis: '“除非……否则……”表示必要条件关系。'
+        analysis: '"除非……否则……"表示必要条件关系。'
     },
     {
         id: 'conjunction_L1_029',
@@ -464,7 +453,7 @@ const CONJUNCTION_QUESTIONS = [
             { key: 'D', text: '他迟到，因为下雨' }
         ],
         answer: ['C'],
-        analysis: '“也”是副词，作状语，不是连词。'
+        analysis: '"也"是副词，作状语，不是连词。'
     },
     {
         id: 'conjunction_L1_030',
@@ -477,14 +466,14 @@ const CONJUNCTION_QUESTIONS = [
         answer: ['T'],
         analysis: '这是连词最核心的功能。'
     },
-    // 进阶题
+    // 连词 L2
     {
         id: 'conjunction_L2_001',
         type: 'single',
         level: 'L2',
         category: 'conjunction',
         tag: '连词/功能对比',
-        stem: '下列句子中，应使用“而且”的是（ ）',
+        stem: '下列句子中，应使用"而且"的是（ ）',
         options: [
             { key: 'A', text: '他生病了，___没来上课' },
             { key: 'B', text: '他聪明___努力' },
@@ -492,7 +481,7 @@ const CONJUNCTION_QUESTIONS = [
             { key: 'D', text: '他迟到了，___被批评了' }
         ],
         answer: ['B'],
-        analysis: '“而且”用于递进，连接性质相近的成分，如“聪明—努力”。'
+        analysis: '"而且"用于递进，连接性质相近的成分，如"聪明—努力"。'
     },
     {
         id: 'conjunction_L2_002',
@@ -500,7 +489,7 @@ const CONJUNCTION_QUESTIONS = [
         level: 'L2',
         category: 'conjunction',
         tag: '连词/功能对比',
-        stem: '下列句子中，应使用“但是”的是（ ）',
+        stem: '下列句子中，应使用"但是"的是（ ）',
         options: [
             { key: 'A', text: '他不但会英语，___会法语' },
             { key: 'B', text: '天气很冷，___他还是出门了' },
@@ -508,16 +497,15 @@ const CONJUNCTION_QUESTIONS = [
             { key: 'D', text: '他因为生病，___没请假' }
         ],
         answer: ['B'],
-        analysis: '“但是”表示转折，对前一情况进行反向补充。'
+        analysis: '"但是"表示转折，对前一情况进行反向补充。'
     },
-
     {
         id: 'conjunction_L2_003',
         type: 'single',
         level: 'L2',
         category: 'conjunction',
         tag: '连词/功能对比',
-        stem: '下列句子中，应使用“或者”的是（ ）',
+        stem: '下列句子中，应使用"或者"的是（ ）',
         options: [
             { key: 'A', text: '他不是老师，___学生' },
             { key: 'B', text: '或者你去，___我去' },
@@ -525,16 +513,15 @@ const CONJUNCTION_QUESTIONS = [
             { key: 'D', text: '他既聪明，___努力' }
         ],
         answer: ['B'],
-        analysis: '“或者”表示选择关系，二者可并存。'
+        analysis: '"或者"表示选择关系，二者可并存。'
     },
-
     {
         id: 'conjunction_L2_004',
         type: 'single',
         level: 'L2',
         category: 'conjunction',
         tag: '连词/功能对比',
-        stem: '下列句子中，应使用“还是”的是（ ）',
+        stem: '下列句子中，应使用"还是"的是（ ）',
         options: [
             { key: 'A', text: '这件事你___我来做？' },
             { key: 'B', text: '你喝茶___喝咖啡？' },
@@ -542,9 +529,8 @@ const CONJUNCTION_QUESTIONS = [
             { key: 'D', text: '今天下雨，___我们不去了' }
         ],
         answer: ['B'],
-        analysis: '“还是”常用于疑问句中表示选择；A应为：这件事是你来，还是我来做；D的还是应给做副词，放在不去之前'
+        analysis: '"还是"常用于疑问句中表示选择；A应为：这件事是你来，还是我来做；D的还是应给做副词，放在不去之前'
     },
-
     {
         id: 'conjunction_L2_005',
         type: 'multiple',
@@ -559,16 +545,15 @@ const CONJUNCTION_QUESTIONS = [
             { key: 'D', text: '不是你，就是我去' }
         ],
         answer: ['A', 'C'],
-        analysis: '“不但……而且”“并且”都表示递进；B 为转折，D 为选择。'
+        analysis: '"不但……而且""并且"都表示递进；B 为转折，D 为选择。'
     },
-
     {
         id: 'conjunction_L2_006',
         type: 'multiple',
         level: 'L2',
         category: 'conjunction',
         tag: '连词/功能对比',
-        stem: '下列句子中，应使用“因为”的是（ ）',
+        stem: '下列句子中，应使用"因为"的是（ ）',
         options: [
             { key: 'A', text: '___天气不好，比赛取消了' },
             { key: 'B', text: '___学习很努力，他取得了好成绩' },
@@ -576,16 +561,15 @@ const CONJUNCTION_QUESTIONS = [
             { key: 'D', text: '___下雨，所以路很滑' }
         ],
         answer: ['A', 'B', 'D'],
-        analysis: '“因为”引出原因，A B D符合因果关系。C 应用为了，表目的'
+        analysis: '"因为"引出原因，A B D符合因果关系。C 应用为了，表目的'
     },
-
     {
         id: 'conjunction_L2_007',
         type: 'single',
         level: 'L2',
         category: 'conjunction',
         tag: '连词/功能对比',
-        stem: '下列句子中，应使用“所以”的是（ ）',
+        stem: '下列句子中，应使用"所以"的是（ ）',
         options: [
             { key: 'A', text: '他努力学习，___成绩提高了' },
             { key: 'B', text: '___他努力学习，成绩提高了' },
@@ -593,9 +577,8 @@ const CONJUNCTION_QUESTIONS = [
             { key: 'D', text: '他努力学习，___失败了' }
         ],
         answer: ['A'],
-        analysis: '“所以”引出结果，通常位于原因之后。'
+        analysis: '"所以"引出结果，通常位于原因之后。'
     },
-
     {
         id: 'conjunction_L2_008',
         type: 'multiple',
@@ -610,16 +593,15 @@ const CONJUNCTION_QUESTIONS = [
             { key: 'D', text: '却' }
         ],
         answer: ['A', 'B', 'D'],
-        analysis: '“但是、不过、却”均表示转折；“而且”表示递进。'
+        analysis: '"但是、不过、却"均表示转折；"而且"表示递进。'
     },
-
     {
         id: 'conjunction_L2_009',
         type: 'single',
         level: 'L2',
         category: 'conjunction',
         tag: '连词/功能对比',
-        stem: '“尽管天气不好，他还是出门了”中，“尽管”表示（ ）',
+        stem: '"尽管天气不好，他还是出门了"中，"尽管"表示（ ）',
         options: [
             { key: 'A', text: '条件' },
             { key: 'B', text: '让步' },
@@ -627,16 +609,15 @@ const CONJUNCTION_QUESTIONS = [
             { key: 'D', text: '选择' }
         ],
         answer: ['B'],
-        analysis: '“尽管”用于让步复句，先承认事实，再转折。'
+        analysis: '"尽管"用于让步复句，先承认事实，再转折。'
     },
-
     {
         id: 'conjunction_L2_010',
         type: 'single',
         level: 'L2',
         category: 'conjunction',
         tag: '连词/功能对比',
-        stem: '下列句子中，应使用“不管”的是（ ）',
+        stem: '下列句子中，应使用"不管"的是（ ）',
         options: [
             { key: 'A', text: '___你同意不同意，我们都要做' },
             { key: 'B', text: '___他生病了，所以没来' },
@@ -644,16 +625,15 @@ const CONJUNCTION_QUESTIONS = [
             { key: 'D', text: '___天气好，我们就出发' }
         ],
         answer: ['A'],
-        analysis: '“不管”引出条件，表示在任何情况下结果不变。'
+        analysis: '"不管"引出条件，表示在任何情况下结果不变。'
     },
-
     {
         id: 'conjunction_L2_011',
         type: 'single',
         level: 'L2',
         category: 'conjunction',
         tag: '连词/功能对比',
-        stem: '下列句子中，应使用“只有……才……”的是（ ）',
+        stem: '下列句子中，应使用"只有……才……"的是（ ）',
         options: [
             { key: 'A', text: '___努力学习，___能取得好成绩' },
             { key: 'B', text: '___他努力学习，成绩___提高了' },
@@ -661,9 +641,8 @@ const CONJUNCTION_QUESTIONS = [
             { key: 'D', text: '___他来了，___我们开始' }
         ],
         answer: ['A'],
-        analysis: '“只有……才……”表示必要条件。BCD都可以表条件，但副词才的位置错误'
+        analysis: '"只有……才……"表示必要条件。BCD都可以表条件，但副词才的位置错误'
     },
-
     {
         id: 'conjunction_L2_012',
         type: 'multiple',
@@ -680,14 +659,13 @@ const CONJUNCTION_QUESTIONS = [
         answer: ['A', 'B', 'D'],
         analysis: 'A、B、D 均表示选择；C 表示并列。'
     },
-
     {
         id: 'conjunction_L2_013',
         type: 'single',
         level: 'L2',
         category: 'conjunction',
         tag: '连词/功能对比',
-        stem: '下列句子中，应使用“而是”的是（ ）',
+        stem: '下列句子中，应使用"而是"的是（ ）',
         options: [
             { key: 'A', text: '他不是生气，___担心' },
             { key: 'B', text: '他努力学习，___成绩不好' },
@@ -695,16 +673,15 @@ const CONJUNCTION_QUESTIONS = [
             { key: 'D', text: '他既聪明，___努力' }
         ],
         answer: ['A'],
-        analysis: '“不是……而是……”表示否定前者、肯定后者的对比关系。'
+        analysis: '"不是……而是……"表示否定前者、肯定后者的对比关系。'
     },
-
     {
         id: 'conjunction_L2_014',
         type: 'single',
         level: 'L2',
         category: 'conjunction',
         tag: '连词/功能对比',
-        stem: '“他没生气，反而笑了”中，“反而”表示（ ）',
+        stem: '"他没生气，反而笑了"中，"反而"表示（ ）',
         options: [
             { key: 'A', text: '递进' },
             { key: 'B', text: '转折' },
@@ -712,9 +689,8 @@ const CONJUNCTION_QUESTIONS = [
             { key: 'D', text: '并列' }
         ],
         answer: ['B'],
-        analysis: '“反而”表示与预期相反的转折。'
+        analysis: '"反而"表示与预期相反的转折。'
     },
-
     {
         id: 'conjunction_L2_015',
         type: 'multiple',
@@ -729,16 +705,15 @@ const CONJUNCTION_QUESTIONS = [
             { key: 'D', text: '除非' }
         ],
         answer: ['A', 'B', 'D'],
-        analysis: '“如果、不管、除非”均可引出条件；“但是”表转折。'
+        analysis: '"如果、不管、除非"均可引出条件；"但是"表转折。'
     },
-
     {
         id: 'conjunction_L2_016',
         type: 'single',
         level: 'L2',
         category: 'conjunction',
         tag: '连词/功能对比',
-        stem: '“他努力学习，因此取得了好成绩”中，“因此”表示（ ）',
+        stem: '"他努力学习，因此取得了好成绩"中，"因此"表示（ ）',
         options: [
             { key: 'A', text: '条件' },
             { key: 'B', text: '因果' },
@@ -746,16 +721,15 @@ const CONJUNCTION_QUESTIONS = [
             { key: 'D', text: '并列' }
         ],
         answer: ['B'],
-        analysis: '“因此”引出结果，表示因果关系。'
+        analysis: '"因此"引出结果，表示因果关系。'
     },
-
     {
         id: 'conjunction_L2_017',
         type: 'single',
         level: 'L2',
         category: 'conjunction',
         tag: '连词/功能对比',
-        stem: '下列句子中，应使用“况且”的是（ ）',
+        stem: '下列句子中，应使用"况且"的是（ ）',
         options: [
             { key: 'A', text: '他工作能力很强，___态度也很认真' },
             { key: 'B', text: '路不远，___还有直达车' },
@@ -763,9 +737,8 @@ const CONJUNCTION_QUESTIONS = [
             { key: 'D', text: '他迟到了，___被批评了' }
         ],
         answer: ['B'],
-        analysis: '“况且”用于补充次要理由。'
+        analysis: '"况且"用于补充次要理由。'
     },
-
     {
         id: 'conjunction_L2_018',
         type: 'multiple',
@@ -782,14 +755,13 @@ const CONJUNCTION_QUESTIONS = [
         answer: ['A', 'B'],
         analysis: 'A、B 为让步；C 为因果；D 为递进。'
     },
-
     {
         id: 'conjunction_L2_019',
         type: 'single',
         level: 'L2',
         category: 'conjunction',
         tag: '连词/功能对比',
-        stem: '“要不是你提醒，我就忘了”中，“要不是”表示（ ）',
+        stem: '"要不是你提醒，我就忘了"中，"要不是"表示（ ）',
         options: [
             { key: 'A', text: '因果' },
             { key: 'B', text: '假设' },
@@ -797,15 +769,15 @@ const CONJUNCTION_QUESTIONS = [
             { key: 'D', text: '并列' }
         ],
         answer: ['B'],
-        analysis: '“要不是”表示与事实相反的假设。这里可以和如果替换'
+        analysis: '"要不是"表示与事实相反的假设。这里可以和如果替换'
     },
     {
-        id: 'conjunction_L2_20',
+        id: 'conjunction_L2_020',
         type: 'single',
         level: 'L2',
         category: 'conjunction',
         tag: '连词/功能对比',
-        stem: '下列句子中，应使用“并且”的是（ ）',
+        stem: '下列句子中，应使用"并且"的是（ ）',
         options: [
             { key: 'A', text: '他工作能力很强，___对同事也十分负责' },
             { key: 'B', text: '房间已经收拾好了，___还准备了晚饭' },
@@ -813,7 +785,7 @@ const CONJUNCTION_QUESTIONS = [
             { key: 'D', text: '他生病住院，___没来参加会议' }
         ],
         answer: ['B'],
-        analysis: '“并且”用于在前一事实基础上补充说明另一事实，侧重“补充而非强化”。B 中“收拾好了房间”是已完成事实，“还准备了晚饭”是额外补充，最符合“并且”的功能；A 属递进强化，更偏“而且”；D 表因果，应使用“所以/因此”。'
+        analysis: '"并且"用于在前一事实基础上补充说明另一事实，侧重"补充而非强化"。B 中"收拾好了房间"是已完成事实，"还准备了晚饭"是额外补充，最符合"并且"的功能；A 属递进强化，更偏"而且"；D 表因果，应使用"所以/因此"。'
     },
     {
         id: 'conjunction_L2_021',
@@ -821,7 +793,7 @@ const CONJUNCTION_QUESTIONS = [
         level: 'L2',
         category: 'conjunction',
         tag: '连词/功能对比',
-        stem: '“他之所以迟到，是因为下雨”中，整体表示（ ）',
+        stem: '"他之所以迟到，是因为下雨"中，整体表示（ ）',
         options: [
             { key: 'A', text: '转折' },
             { key: 'B', text: '因果' },
@@ -829,9 +801,8 @@ const CONJUNCTION_QUESTIONS = [
             { key: 'D', text: '选择' }
         ],
         answer: ['B'],
-        analysis: '“之所以……是因为……”是典型因果结构。'
+        analysis: '"之所以……是因为……"是典型因果结构。'
     },
-
     {
         id: 'conjunction_L2_022',
         type: 'multiple',
@@ -846,16 +817,15 @@ const CONJUNCTION_QUESTIONS = [
             { key: 'D', text: '可是' }
         ],
         answer: ['A', 'B'],
-        analysis: '“然而、况且”多用于书面语；“不过、可是”偏口语。'
+        analysis: '"然而、况且"多用于书面语；"不过、可是"偏口语。'
     },
-
     {
         id: 'conjunction_L2_023',
         type: 'single',
         level: 'L2',
         category: 'conjunction',
         tag: '连词/功能对比',
-        stem: '“他不但没生气，反而笑了”中，后半句的功能是（ ）',
+        stem: '"他不但没生气，反而笑了"中，后半句的功能是（ ）',
         options: [
             { key: 'A', text: '递进' },
             { key: 'B', text: '转折' },
@@ -863,16 +833,15 @@ const CONJUNCTION_QUESTIONS = [
             { key: 'D', text: '条件' }
         ],
         answer: ['B'],
-        analysis: '“反而”强调与预期相反的转折。'
+        analysis: '"反而"强调与预期相反的转折。'
     },
-
     {
         id: 'conjunction_L2_024',
         type: 'multiple',
         level: 'L2',
         category: 'conjunction',
         tag: '连词/功能对比',
-        stem: '下列句子中，应使用“要是”的是（ ）',
+        stem: '下列句子中，应使用"要是"的是（ ）',
         options: [
             { key: 'A', text: '___明天再下雨，这项工程就只能延期了' },
             { key: 'B', text: '___连续降雨，道路出现了积水现象' },
@@ -880,7 +849,7 @@ const CONJUNCTION_QUESTIONS = [
             { key: 'D', text: '___没有他当初的坚持，这个件事肯定没办法完成 ' }
         ],
         answer: ['A', 'D'],
-        analysis: 'A D表为对未来或过去情况的假设，符合“要是”的假设用法；B、C 为已然原因关系，应使用“由于 / 因为”'
+        analysis: 'A D表为对未来或过去情况的假设，符合"要是"的假设用法；B、C 为已然原因关系，应使用"由于 / 因为"'
     },
     {
         id: 'conjunction_L2_025',
@@ -904,7 +873,7 @@ const CONJUNCTION_QUESTIONS = [
         level: 'L2',
         category: 'conjunction',
         tag: '连词/功能对比',
-        stem: '“他不是来晚了，而是记错了时间”中，后半句的功能是（ ）',
+        stem: '"他不是来晚了，而是记错了时间"中，后半句的功能是（ ）',
         options: [
             { key: 'A', text: '递进' },
             { key: 'B', text: '否定' },
@@ -912,16 +881,15 @@ const CONJUNCTION_QUESTIONS = [
             { key: 'D', text: '选择' }
         ],
         answer: ['C'],
-        analysis: '“不是……而是……”先否定前项，再肯定后项。'
+        analysis: '"不是……而是……"先否定前项，再肯定后项。'
     },
-
     {
         id: 'conjunction_L2_027',
         type: 'single',
         level: 'L2',
         category: 'conjunction',
         tag: '连词/功能对比',
-        stem: '“无论谁来，我都欢迎”中，“无论”表示（ ）',
+        stem: '"无论谁来，我都欢迎"中，"无论"表示（ ）',
         options: [
             { key: 'A', text: '假设' },
             { key: 'B', text: '条件' },
@@ -929,9 +897,8 @@ const CONJUNCTION_QUESTIONS = [
             { key: 'D', text: '因果' }
         ],
         answer: ['B'],
-        analysis: '“无论”引出条件，表示在任何条件下结果不变。'
+        analysis: '"无论"引出条件，表示在任何条件下结果不变。'
     },
-
     {
         id: 'conjunction_L2_028',
         type: 'multiple',
@@ -946,16 +913,15 @@ const CONJUNCTION_QUESTIONS = [
             { key: 'D', text: '若' }
         ],
         answer: ['A', 'B', 'D'],
-        analysis: '“如果、要是、若”均表示假设。'
+        analysis: '"如果、要是、若"均表示假设。'
     },
-
     {
         id: 'conjunction_L2_029',
         type: 'single',
         level: 'L2',
         category: 'conjunction',
         tag: '连词/功能对比',
-        stem: '“他努力学习，结果没拿到好成绩，可能是学习方法的问题。”，其中“结果”表示（ ）',
+        stem: '"他努力学习，结果没拿到好成绩，可能是学习方法的问题。"，其中"结果"表示（ ）',
         options: [
             { key: 'A', text: '递进' },
             { key: 'B', text: '因果' },
@@ -963,16 +929,15 @@ const CONJUNCTION_QUESTIONS = [
             { key: 'D', text: '条件' }
         ],
         answer: ['C'],
-        analysis: '“结果”引出行为产生的结果，属于因果关系。'
+        analysis: '"结果"引出与预期相反的结果，这里属于转折关系。'
     },
-
     {
         id: 'conjunction_L2_030',
         type: 'single',
         level: 'L2',
         category: 'conjunction',
         tag: '连词/功能对比',
-        stem: '下列句子中，应使用“反而”的是（ ）',
+        stem: '下列句子中，应使用"反而"的是（ ）',
         options: [
             { key: 'A', text: '他努力学习，___成绩提高了' },
             { key: 'B', text: '他没生气，___笑了起来' },
@@ -980,7 +945,7 @@ const CONJUNCTION_QUESTIONS = [
             { key: 'D', text: '他下雨了，___没来' }
         ],
         answer: ['B'],
-        analysis: '“反而”用于强调结果与预期相反。'
+        analysis: '"反而"用于强调结果与预期相反。'
     }
 ];
 
