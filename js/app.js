@@ -385,16 +385,16 @@ const app = createApp({
                     imageTimeout: 15000,
                     removeContainer: true,
                     async: true,
-                    width: 800, // 固定宽度匹配 container max-width
+                    width: 500, // 固定宽度匹配 container max-width
                     onclone: (clonedDoc) => {
                         // 确保克隆的文档中所有内容可见
                         const clonedContainer = clonedDoc.querySelector('.report-page .container');
                         if (clonedContainer) {
                             // 保持容器的最大宽度和布局
-                            clonedContainer.style.maxWidth = '800px';
-                            clonedContainer.style.width = '800px';
+                            clonedContainer.style.maxWidth = '500px';
+                            clonedContainer.style.width = '500px';
                             clonedContainer.style.margin = '0 auto';
-                            clonedContainer.style.padding = '24px';
+                            clonedContainer.style.padding = '16px';
                             clonedContainer.style.opacity = '1';
                             clonedContainer.style.visibility = 'visible';
                             clonedContainer.style.display = 'block';
@@ -409,11 +409,11 @@ const app = createApp({
                                 el.style.transition = 'none';
                             });
 
-                            // 确保按钮和卡片保持正常宽度（不要100%填充）
+                            // 隐藏按钮
                             const buttons = clonedContainer.querySelectorAll('.btn');
                             buttons.forEach(btn => {
                                 btn.style.width = 'auto';
-                                btn.style.display = 'inline-flex';
+                                btn.style.display = 'none';
                             });
 
                             // 确保 stats-grid 保持网格布局
