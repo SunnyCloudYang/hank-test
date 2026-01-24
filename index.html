@@ -7,6 +7,8 @@
     <title>现代汉语虚词练习平台</title>
     <!-- Vue 3 CDN -->
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <!-- html2canvas for image export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <!-- 样式文件 -->
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -365,7 +367,10 @@
                         重新练习
                     </button>
                     <button class="btn btn-outline btn-large" @click="downloadReport">
-                        保存为 PDF
+                        {{ isMobile ? '导出为图片' : '保存为 PDF' }}
+                    </button>
+                    <button v-if="!isMobile" class="btn btn-outline btn-large" @click="exportAsImage">
+                        导出为图片
                     </button>
                 </div>
             </div>

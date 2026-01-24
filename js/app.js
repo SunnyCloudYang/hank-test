@@ -54,6 +54,9 @@ const app = createApp({
         // ========== 报告数据 ==========
         const reportData = ref({});
 
+        // ========== 设备检测 ==========
+        const isMobile = ref(false);
+
         // ========== 计算属性 ==========
         const sessionLimit = computed(() => {
             // 如果题库总数少于限制，则使用题库总数
@@ -297,21 +300,186 @@ const app = createApp({
         }
 
         /**
-         * 下载报告（PDF格式）
-         * 使用浏览器打印功能导出为PDF
+         * 下载报告（PDF格式或图片格式）
+         * 在移动设备上默认导出为图片，桌面设备使用打印功能
          */
         function downloadReport() {
-            // 设置打印标题
-            const originalTitle = document.title;
-            document.title = `虚词练习报告_${formatDate(new Date())}`;
+            if (isMobile.value) {
+                exportAsImage();
+            } else {
+                // 设置打印标题
+                const originalTitle = document.title;
+                document.title = `虚词练习报告_${formatDate(new Date())}`;
 
-            // 触发打印对话框（用户可选择"另存为PDF"）
-            window.print();
+                // 触发打印对话框（用户可选择"另存为PDF"）
+                window.print();
 
-            // 恢复原标题
-            setTimeout(() => {
-                document.title = originalTitle;
-            }, 1000);
+                // 恢复原标题
+                setTimeout(() => {
+                    document.title = originalTitle;
+                }, 1000);
+            }
+        }
+
+        /**
+         * 导出报告为图片
+         * 使用 html2canvas 将报告页面转换为图片并下载
+         */
+        async function exportAsImage() {
+            try {
+                // 检查 html2canvas 是否可用
+                if (typeof html2canvas === 'undefined') {
+                    alert('图片导出功能暂不可用，请刷新页面后重试');
+                    return;
+                }
+
+                // 滚动到页面顶部
+                window.scrollTo(0, 0);
+
+                // 显示加载提示
+                const loadingMsg = document.createElement('div');
+                loadingMsg.textContent = '正在生成图片...';
+                loadingMsg.style.cssText = `
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background: rgba(0, 0, 0, 0.8);
+                    color: white;
+                    padding: 20px 40px;
+                    border-radius: 8px;
+                    z-index: 9999;
+                    font-size: 16px;
+                `;
+                document.body.appendChild(loadingMsg);
+
+                // 获取报告容器
+                const reportContainer = document.querySelector('.report-page .container');
+                if (!reportContainer) {
+                    throw new Error('找不到报告容器');
+                }
+
+                // 临时禁用所有动画以确保内容完全可见
+                const styleSheet = document.createElement('style');
+                styleSheet.id = 'export-temp-style';
+                styleSheet.textContent = `
+                    * {
+                        animation: none !important;
+                        transition: none !important;
+                    }
+                `;
+                document.head.appendChild(styleSheet);
+
+                // 强制重绘并等待渲染完成
+                reportContainer.offsetHeight; // 触发重排
+                await new Promise(resolve => setTimeout(resolve, 500));
+
+                // 使用 html2canvas 生成图片
+                const canvas = await html2canvas(reportContainer, {
+                    backgroundColor: '#f8f9fa',
+                    scale: 2, // 提高清晰度
+                    logging: false,
+                    useCORS: true,
+                    allowTaint: true,
+                    foreignObjectRendering: false,
+                    imageTimeout: 15000,
+                    removeContainer: true,
+                    async: true,
+                    width: 800, // 固定宽度匹配 container max-width
+                    onclone: (clonedDoc) => {
+                        // 确保克隆的文档中所有内容可见
+                        const clonedContainer = clonedDoc.querySelector('.report-page .container');
+                        if (clonedContainer) {
+                            // 保持容器的最大宽度和布局
+                            clonedContainer.style.maxWidth = '800px';
+                            clonedContainer.style.width = '800px';
+                            clonedContainer.style.margin = '0 auto';
+                            clonedContainer.style.padding = '24px';
+                            clonedContainer.style.opacity = '1';
+                            clonedContainer.style.visibility = 'visible';
+                            clonedContainer.style.display = 'block';
+                            clonedContainer.style.boxSizing = 'border-box';
+                            
+                            // 确保所有子元素也可见并禁用动画
+                            const allElements = clonedContainer.querySelectorAll('*');
+                            allElements.forEach(el => {
+                                el.style.opacity = '1';
+                                el.style.visibility = 'visible';
+                                el.style.animation = 'none';
+                                el.style.transition = 'none';
+                            });
+
+                            // 确保按钮和卡片保持正常宽度（不要100%填充）
+                            const buttons = clonedContainer.querySelectorAll('.btn');
+                            buttons.forEach(btn => {
+                                btn.style.width = 'auto';
+                                btn.style.display = 'inline-flex';
+                            });
+
+                            // 确保 stats-grid 保持网格布局
+                            const statsGrid = clonedContainer.querySelector('.stats-grid');
+                            if (statsGrid) {
+                                statsGrid.style.display = 'grid';
+                                statsGrid.style.gridTemplateColumns = 'repeat(2, 1fr)';
+                                statsGrid.style.gap = '16px';
+                            }
+                        }
+                    }
+                });
+
+                // 移除临时样式
+                const tempStyle = document.getElementById('export-temp-style');
+                if (tempStyle) {
+                    tempStyle.remove();
+                }
+
+                // 移除加载提示
+                document.body.removeChild(loadingMsg);
+
+                // 检查 canvas 是否为空
+                if (canvas.width === 0 || canvas.height === 0) {
+                    throw new Error('生成的图片为空');
+                }
+
+                // 转换为图片并下载
+                canvas.toBlob((blob) => {
+                    if (!blob) {
+                        alert('生成图片失败，请重试');
+                        return;
+                    }
+                    const url = URL.createObjectURL(blob);
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.download = `虚词练习报告_${formatDate(new Date())}.png`;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    URL.revokeObjectURL(url);
+                }, 'image/png');
+            } catch (error) {
+                // 清理临时样式
+                const tempStyle = document.getElementById('export-temp-style');
+                if (tempStyle) {
+                    tempStyle.remove();
+                }
+                
+                alert('导出图片失败：' + error.message);
+                console.error('Export image error:', error);
+            }
+        }
+
+        /**
+         * 检测是否为移动设备
+         */
+        function detectMobile() {
+            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            // 检测移动设备
+            const mobileRegex = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i;
+            // 检测触摸屏和小屏幕
+            const hasTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+            const isSmallScreen = window.innerWidth <= 768;
+            
+            isMobile.value = mobileRegex.test(userAgent) || (hasTouch && isSmallScreen);
         }
 
         /**
@@ -387,6 +555,12 @@ const app = createApp({
         // ========== 生命周期 ==========
 
         onMounted(() => {
+            // 检测设备类型
+            detectMobile();
+            
+            // 监听窗口大小变化以重新检测设备类型
+            window.addEventListener('resize', detectMobile);
+
             // 检查是否有未完成的练习
             if (loadSession() && session.records.length > 0) {
                 const resumeConfirm = confirm(
@@ -439,6 +613,9 @@ const app = createApp({
             // 报告
             reportData,
 
+            // 设备检测
+            isMobile,
+
             // 方法
             startPractice,
             selectOption,
@@ -448,6 +625,7 @@ const app = createApp({
             confirmReset,
             restartPractice,
             downloadReport,
+            exportAsImage,
             getAccuracyClass,
             getCategoryName,
             closeCelebration
