@@ -31,22 +31,6 @@ const MODAL_QUESTIONS = [
         analysis: 'B 为已然事实的补充强调；A、D 为疑问语气；C 带有责怪意味，偏反问。'
     },
     {
-        id: 'modal_L1_002',
-        type: 'single',
-        level: 'L1',
-        category: 'modal',
-        tag: '语气词/作用辨析',
-        stem: '句子“他还没回来呢”中，“呢”的主要作用是（ ）',
-        options: [
-            { key: 'A', text: '表示疑问' },
-            { key: 'B', text: '表示强调陈述' },
-            { key: 'C', text: '表示命令' },
-            { key: 'D', text: '表示假设' }
-        ],
-        answer: ['B'],
-        analysis: '“呢”用于陈述句末，起强调、提示作用，不构成疑问。'
-    },
-    {
         id: 'modal_L1_003',
         type: 'single',
         level: 'L1',
@@ -63,22 +47,6 @@ const MODAL_QUESTIONS = [
         analysis: 'B 中“吧”用于判断性陈述，表示说话人的推测。'
     },
     {
-        id: 'modal_L1_004',
-        type: 'multiple',
-        level: 'L1',
-        category: 'modal',
-        tag: '语气词/词类识别',
-        stem: '下列句子中，句末属于语气词的是（ ）',
-        options: [
-            { key: 'A', text: '你已经吃过饭了吗' },
-            { key: 'B', text: '事情已经解决了呢' },
-            { key: 'C', text: '这不过是小事罢了' },
-            { key: 'D', text: '他昨天来过北京吧' }
-        ],
-        answer: ['A', 'B', 'C', 'D'],
-        analysis: 'A“吗”表疑问；B“了”表告知；C“罢了”表轻描淡写；D表疑问揣测，均为语气词。'
-    },
-    {
         id: 'modal_L1_005',
         type: 'judgment',
         level: 'L1',
@@ -87,7 +55,8 @@ const MODAL_QUESTIONS = [
         stem: '语气词一般位于句末，用来表达说话人的态度或语气。（ ）',
         options: [],
         answer: ['T'],
-        analysis: '语气词主要附着于句末或句中，表达语气而不改变句子语义。'
+        analysis: '语气词主要附着于句末或句中，表达语气而不改变句子语义。',
+        fixed: true 
     },
     {
         id: 'modal_L1_006',
@@ -106,38 +75,6 @@ const MODAL_QUESTIONS = [
         analysis: '“吗”用于是非问句；A、B 为特殊疑问句，不用“吗”。'
     },
     {
-        id: 'modal_L1_007',
-        type: 'single',
-        level: 'L1',
-        category: 'modal',
-        tag: '语气词/作用辨析',
-        stem: '句子“快点嘛”中，“嘛”的语气作用是（ ）',
-        options: [
-            { key: 'A', text: '命令' },
-            { key: 'B', text: '不满' },
-            { key: 'C', text: '怀疑' },
-            { key: 'D', text: '陈述' }
-        ],
-        answer: ['B'],
-        analysis: '“嘛”常用于口语，缓和语气，此处表不满。'
-    },
-    {
-        id: 'modal_L1_008',
-        type: 'multiple',
-        level: 'L1',
-        category: 'modal',
-        tag: '语气词/作用辨析',
-        stem: '下列句子中，语气词用于祈使语气的是（ ）',
-        options: [
-            { key: 'A', text: '我们走吧' },
-            { key: 'B', text: '别着急呀' },
-            { key: 'C', text: '你是新来的吧' },
-            { key: 'D', text: '去就去呗' }
-        ],
-        answer: ['A', 'B', 'D'],
-        analysis: 'A、B、D 均用于请求、禁止或让步；C 为揣测性疑问。'
-    },
-    {
         id: 'modal_L1_009',
         type: 'judgment',
         level: 'L1',
@@ -147,22 +84,6 @@ const MODAL_QUESTIONS = [
         options: [],
         answer: ['F'],
         analysis: '语气词只影响语气类型，不改变句子语义。'
-    },
-    {
-        id: 'modal_L1_010',
-        type: 'single',
-        level: 'L1',
-        category: 'modal',
-        tag: '语气词/作用辨析',
-        stem: '下列句子中，“啊”用于表达感叹的是（ ）',
-        options: [
-            { key: 'A', text: '你啊，总是太心急' },
-            { key: 'B', text: '今天真冷啊' },
-            { key: 'C', text: '他啊，已经知道结果了' },
-            { key: 'D', text: '事情啊，还得慢慢解决' }
-        ],
-        answer: ['B'],
-        analysis: 'B 中“啊”用于句末，加强感叹语气；其余为句中停顿。'
     },
     {
         id: 'modal_L1_011',
@@ -197,33 +118,6 @@ const MODAL_QUESTIONS = [
         analysis: 'A、C 的“呢”用于话题提示/句中停顿，起舒缓作用；B、D 为疑问语气（追问/特指问）。'
     },
     {
-        id: 'modal_L1_013',
-        type: 'single',
-        level: 'L1',
-        category: 'modal',
-        tag: '语气词/作用辨析',
-        stem: '下列句子中，“呗”表达“无所谓/让步接受”语气的是（ ）',
-        options: [
-            { key: 'A', text: '你不想去就不去呗' },
-            { key: 'B', text: '你先坐下呗，我们慢慢说' },
-            { key: 'C', text: '他现在忙着呢，别打扰他呗' },
-            { key: 'D', text: '这么重要的事，你也忘了呗？' }
-        ],
-        answer: ['A'],
-        analysis: 'A 中“呗”体现“既然如此就随你/我接受”的让步无所谓语气；B 更像建议缓和；C 语义不自然；D 近反诘取笑语气，不是典型“无所谓”。'
-    },
-    {
-        id: 'modal_L1_014',
-        type: 'judgment',
-        level: 'L1',
-        category: 'modal',
-        tag: '语气词/特征',
-        stem: '判断正误：语气词的核心作用是影响句子的语气类型（陈述/疑问/祈使/感叹），但通常不改变句子的基本语义命题。（ ）',
-        options: [],
-        answer: ['T'],
-        analysis: '语气词主要表达说话人态度、语气强弱与句式类型，一般不改变命题内容（“发生了什么”）。'
-    },
-    {
         id: 'modal_L1_015',
         type: 'multiple',
         level: 'L1',
@@ -239,22 +133,7 @@ const MODAL_QUESTIONS = [
         answer: ['A', 'D'],
         analysis: 'A 句末“吧”为语气词，缓和祈使/建议；B、C 为表揣测。'
     },
-    {
-        id: 'modal_L1_016',
-        type: 'multiple',
-        level: 'L1',
-        category: 'modal',
-        tag: '语气词/作用辨析',
-        stem: '下列句子中，“啊”主要用于加强感叹语气的是（ ）',
-        options: [
-            { key: 'A', text: '这么巧啊！你也在这里' },
-            { key: 'B', text: '你啊，就是太急了' },
-            { key: 'C', text: '这道题好难啊！我得再想想' },
-            { key: 'D', text: '原来是你啊，我还以为认错人了' }
-        ],
-        answer: ['A', 'C', 'D'],
-        analysis: 'A、C 、D 的“啊”加强感叹（惊讶/感慨）；B 多为句中停顿、带评价。'
-    },
+    
     {
         id: 'modal_L1_017',
         type: 'single',
@@ -270,22 +149,6 @@ const MODAL_QUESTIONS = [
         ],
         answer: ['B'],
         analysis: 'B 为特指问句，“呢”标记疑问语气；A 为强调状态；C、D 为话题提示/停顿。'
-    },
-    {
-        id: 'modal_L1_018',
-        type: 'multiple',
-        level: 'L1',
-        category: 'modal',
-        tag: '语气词/作用辨析',
-        stem: '下列句子中，“的”用于“确认/强调陈述”语气的是（ ）',
-        options: [
-            { key: 'A', text: '他是学生的' },
-            { key: 'B', text: '我买的那本书找不到了' },
-            { key: 'C', text: '这事我知道的，你放心' },
-            { key: 'D', text: '他写的报告很详细' }
-        ],
-        answer: ['A', 'C'],
-        analysis: 'A、C 中句末“的”表达确认/强调陈述；B、D 的“的”均为结构助词，构成定中关系。'
     },
     {
         id: 'modal_L1_019',
@@ -315,53 +178,23 @@ const MODAL_QUESTIONS = [
         analysis: '语气词典型位置是句末；但“啊/呢/吧”等也可用于句中停顿与话题提示，起舒缓和强调作用。'
     },
     // 助词与语气词 L2
+   
     {
-        id: 'modal_L2_01',
+        id: 'modal_L2_04',
         type: 'multiple',
         level: 'L2',
-        category: 'particle',
-        tag: '助词/作用辨析',
-        stem: '下列句子中，句末“的”属于结构助词的是（ ）',
-        options: [
-            { key: 'A', text: '书的封面是黄色的' },
-            { key: 'B', text: '这个游戏是刚推出的' },
-            { key: 'C', text: '这样说是不可被接受的' },
-            { key: 'D', text: '他今天会回来的' }
-        ],
-        answer: ['A', 'B'],
-        analysis: '结构助词：后面能加名词 / 删后变句意 / 可在 “是” 前加否定词：A 后可以加“书”；B 后可以加游戏；C后无法加中心语；删除D后，句子意思结构都不变'
-    },
-    {
-        id: 'particle_L2_002',
-        type: 'single',
-        level: 'L2',
         category: 'modal',
-        tag: '语气词/词类辨析',
-        stem: '下列句子中，“的”用于表示语气确认的是（ ）',
+        tag: '语气词/作用辨析',
+        stem: '下列句子中，“啊”主要用于加强感叹语气的是（ ）',
         options: [
-            { key: 'A', text: '他是坐飞机来的北京' },
-            { key: 'B', text: '他坐飞机来北京的' },
-            { key: 'C', text: '他买的是新的手机' },
-            { key: 'D', text: '这是他写的报告' }
+            { key: 'A', text: '这么巧啊！你也在这里' },
+            { key: 'B', text: '你啊，就是太急了' },
+            { key: 'C', text: '这道题好难啊！我得再想想' },
+            { key: 'D', text: '原来是你啊，我还以为认错人了' }
         ],
-        answer: ['B'],
-        analysis: 'B 中“是……的”用于确认动作方式，“的”为语气词，删去后句子仍成立；A 中“来的北京”强调动作与处所关系，“的”为结构助词；C、D 中“的”均连接定语与名词。'
-    },
-    {
-        id: 'particle_L2_003',
-        type: 'single',
-        level: 'L2',
-        category: 'modal',
-        tag: '语气词/词类辨析',
-        stem: '下列句子中，“了”同时具有动态助词和语气词功能的是（ ）',
-        options: [
-            { key: 'A', text: '他吃了饭' },
-            { key: 'B', text: '他吃饭了' },
-            { key: 'C', text: '他已经吃过饭了' },
-            { key: 'D', text: '他吃过饭了' }
-        ],
-        answer: ['B'],
-        analysis: 'B 中“了”既表示动作完成（吃饭已发生），又位于句末，起到告知语气作用，属于动态助词与语气词的兼用法；A 仅表完成，C、D 以“过”为主，删除仅损失语气。'
+        answer: ['A', 'C', 'D'],
+        analysis: 'A、C 、D 的“啊”加强感叹（惊讶/感慨）；B 多为句中停顿、带评价。',
+        fixed: true 
     }
 ];
 

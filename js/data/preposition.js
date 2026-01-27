@@ -29,7 +29,7 @@ const PREPOSITION_QUESTIONS = [
             { key: 'D', text: '语气词' }
         ],
         answer: ['A'],
-        analysis: '"为"后接名词性短语，构成介词短语，表示对象或目的，是介词。'
+        analysis: '"为"后接名词性短语，构成介词短语，表示对象或目的，是介词。',
     },
     {
         id: 'preposition_L1_002',
@@ -77,23 +77,8 @@ const PREPOSITION_QUESTIONS = [
             { key: 'D', text: '充当宾语' }
         ],
         answer: ['C'],
-        analysis: '介词短语不能独立作主语或谓语，其核心功能是修饰谓词性词语。'
-    },
-    {
-        id: 'preposition_L1_005',
-        type: 'single',
-        level: 'L1',
-        category: 'preposition',
-        tag: '介词/作用辨析',
-        stem: '句子"他比我高五厘米"中，"比"的作用是（ ）',
-        options: [
-            { key: 'A', text: '引出比较对象' },
-            { key: 'B', text: '引出时间' },
-            { key: 'C', text: '引出原因' },
-            { key: 'D', text: '引出凭借' }
-        ],
-        answer: ['A'],
-        analysis: '"比"是表比较的介词，引出比较对象。'
+        analysis: '介词短语不能独立作主语或谓语，其核心功能是修饰谓词性词语。',
+        fixed: true 
     },
     {
         id: 'preposition_L1_006',
@@ -144,22 +129,6 @@ const PREPOSITION_QUESTIONS = [
         analysis: '"在大学的时候"表示动作发生的时间，"在"引出时间。'
     },
     {
-        id: 'preposition_L1_009',
-        type: 'single',
-        level: 'L1',
-        category: 'preposition',
-        tag: '介词/作用辨析',
-        stem: '下列介词短语中，表示处所的是（ ）',
-        options: [
-            { key: 'A', text: '从昨天起' },
-            { key: 'B', text: '对老师' },
-            { key: 'C', text: '在新加坡' },
-            { key: 'D', text: '为朋友' }
-        ],
-        answer: ['C'],
-        analysis: '"在新加坡"表示地点，属于引出处所的介词短语。'
-    },
-    {
         id: 'preposition_L1_010',
         type: 'single',
         level: 'L1',
@@ -192,22 +161,6 @@ const PREPOSITION_QUESTIONS = [
         analysis: '"比"用于比较，引出比较对象。'
     },
     {
-        id: 'preposition_L1_012',
-        type: 'single',
-        level: 'L1',
-        category: 'preposition',
-        tag: '介词/作用辨析',
-        stem: '下列句子中，"为"表示目的的是（ ）',
-        options: [
-            { key: 'A', text: '他为老师服务' },
-            { key: 'B', text: '大家为他鼓掌' },
-            { key: 'C', text: '为了完成任务，他加班了' },
-            { key: 'D', text: '他为我着想' }
-        ],
-        answer: ['C'],
-        analysis: '"为了完成任务"明确表示行为目的。'
-    },
-    {
         id: 'preposition_L1_013',
         type: 'single',
         level: 'L1',
@@ -224,22 +177,6 @@ const PREPOSITION_QUESTIONS = [
         analysis: '"朝"常用于表示方向，如"朝东走"。'
     },
     {
-        id: 'preposition_L1_014',
-        type: 'single',
-        level: 'L1',
-        category: 'preposition',
-        tag: '介词/句法功能',
-        stem: '句子"老王每天沿着湖边跑步"中，介词短语"沿着湖边"在句中作（ ）',
-        options: [
-            { key: 'A', text: '定语' },
-            { key: 'B', text: '状语' },
-            { key: 'C', text: '补语' },
-            { key: 'D', text: '宾语' }
-        ],
-        answer: ['B'],
-        analysis: '"沿着湖边"位于动词前，修饰"跑步"，作状语。'
-    },
-    {
         id: 'preposition_L1_015',
         type: 'single',
         level: 'L1',
@@ -254,22 +191,6 @@ const PREPOSITION_QUESTIONS = [
         ],
         answer: ['B'],
         analysis: '"在桌子上"位于动词后，补充说明"放"的结果位置。'
-    },
-    {
-        id: 'preposition_L1_016',
-        type: 'single',
-        level: 'L1',
-        category: 'preposition',
-        tag: '介词/作用辨析',
-        stem: '例句"这位售货员对顾客很热情"中，"对"引出的是（ ）',
-        options: [
-            { key: 'A', text: '时间' },
-            { key: 'B', text: '处所' },
-            { key: 'C', text: '对象' },
-            { key: 'D', text: '原因' }
-        ],
-        answer: ['C'],
-        analysis: '"对顾客"说明态度所指向的对象。'
     },
     {
         id: 'preposition_L1_017',
@@ -302,38 +223,6 @@ const PREPOSITION_QUESTIONS = [
         ],
         answer: ['B'],
         analysis: '"根据"用于说明行动依据。'
-    },
-    {
-        id: 'preposition_L1_019',
-        type: 'single',
-        level: 'L1',
-        category: 'preposition',
-        tag: '介词/作用辨析',
-        stem: '下列介词短语中，表示原因的是（ ）',
-        options: [
-            { key: 'A', text: '为朋友' },
-            { key: 'B', text: '由于身体问题' },
-            { key: 'C', text: '从北京' },
-            { key: 'D', text: '朝前走' }
-        ],
-        answer: ['B'],
-        analysis: '"由于"用于引出原因。'
-    },
-    {
-        id: 'preposition_L1_020',
-        type: 'single',
-        level: 'L1',
-        category: 'preposition',
-        tag: '介词/词类识别',
-        stem: '下列句子中，划线词作介词的是（ ）',
-        options: [
-            { key: 'A', text: '他在家看书' },
-            { key: 'B', text: '他给了我一本书' },
-            { key: 'C', text: '灯还亮着' },
-            { key: 'D', text: '他还在想问题' }
-        ],
-        answer: ['A'],
-        analysis: '"在家"引出处所，"看书"承担核心谓语功能，因此"在"作介词；其余为副词或动词用法。'
     },
     {
         id: 'preposition_L1_021',
@@ -413,7 +302,8 @@ const PREPOSITION_QUESTIONS = [
             { key: 'D', text: '介词本身具有完整词汇意义' }
         ],
         answer: ['B'],
-        analysis: '介词不能单独使用，必须依附名词或名词性短语之前，构成介词短语，这是介词的基本特征。'
+        analysis: '介词不能单独使用，必须依附名词或名词性短语之前，构成介词短语，这是介词的基本特征。',
+        fixed:true
     },
     {
         id: 'preposition_L1_026',
@@ -447,55 +337,24 @@ const PREPOSITION_QUESTIONS = [
         answer: ['C'],
         analysis: '介词不能单独使用，也不能单独回答问题。'
     },
-    {
-        id: 'preposition_L1_028',
-        type: 'single',
-        level: 'L1',
-        category: 'preposition',
-        tag: '介词/特征',
-        stem: '下列短语中，最能体现介词"依附性"的是（ ）',
-        options: [
-            { key: 'A', text: '已经完成' },
-            { key: 'B', text: '从昨天起' },
-            { key: 'C', text: '非常认真' },
-            { key: 'D', text: '慢慢地走' }
-        ],
-        answer: ['B'],
-        analysis: '"从"必须依附时间名词"昨天"，共同构成介词短语，体现介词的依附性。'
-    },
-    {
-        id: 'preposition_L1_029',
-        type: 'single',
-        level: 'L1',
-        category: 'preposition',
-        tag: '介词/特征',
-        stem: '下列关于介词短语的说法，正确的是（ ）',
-        options: [
-            { key: 'A', text: '介词短语只能出现在动词前' },
-            { key: 'B', text: '介词短语不能作定语' },
-            { key: 'C', text: '介词短语由介词和实词共同构成' },
-            { key: 'D', text: '介词短语可以充当句子的谓语' }
-        ],
-        answer: ['C'],
-        analysis: '介词短语由介词和名词、代词或名词性短语构成。'
-    },
-    {
-        id: 'preposition_L1_030',
-        type: 'single',
-        level: 'L1',
-        category: 'preposition',
-        tag: '介词/特征',
-        stem: '从词类功能看，介词最接近下列哪一类词的特点？（ ）',
-        options: [
-            { key: 'A', text: '名词（表事物）' },
-            { key: 'B', text: '动词（表动作）' },
-            { key: 'C', text: '形容词（表性质）' },
-            { key: 'D', text: '虚词（表语法关系）' }
-        ],
-        answer: ['D'],
-        analysis: '介词属于虚词，主要功能是表示语法和语义关系，而不是具体意义。'
-    },
+
     // 介词 L2
+    {
+        id: 'preposition_L2_105',
+        type: 'single',
+        level: 'L2',
+        category: 'preposition',
+        tag: '介词/作用辨析',
+        stem: '句子"他比我高五厘米"中，"比"的作用是（ ）',
+        options: [
+            { key: 'A', text: '引出比较对象' },
+            { key: 'B', text: '引出时间' },
+            { key: 'C', text: '引出原因' },
+            { key: 'D', text: '引出凭借' }
+        ],
+        answer: ['A'],
+        analysis: '"比"是表比较的介词，引出比较对象。'
+    },
     {
         id: 'preposition_L2_001',
         type: 'single',
@@ -542,7 +401,7 @@ const PREPOSITION_QUESTIONS = [
             { key: 'D', text: '到那时，我们已经毕业了' }
         ],
         answer: ['B', 'D'],
-        analysis: '"到上海去"中，"到"不能带动态助词，作介词；D 中"到"引出时间名词；A、C 为动词。'
+        analysis: '"到上海去"中，"到"不能带动态助词，作介词；D 中"到"引出时间名词；A、C 为动词。',
     },
     {
         id: 'preposition_L2_004',
@@ -561,22 +420,6 @@ const PREPOSITION_QUESTIONS = [
         analysis: '"比"作介词时不能重叠、不能带助词；B 为动词。'
     },
     {
-        id: 'preposition_L2_005',
-        type: 'single',
-        level: 'L2',
-        category: 'preposition',
-        tag: '介词/功能对比',
-        stem: '下列句子中，应选用"对于"的是（ ）',
-        options: [
-            { key: 'A', text: '___这次考试，他已经做好准备' },
-            { key: 'B', text: '他___我很客气' },
-            { key: 'C', text: '___这件事的处理方式，大家意见不一' },
-            { key: 'D', text: '文章标题：___环境保护的几点思考' }
-        ],
-        answer: ['C'],
-        analysis: '"对于"强调谈论对象。'
-    },
-    {
         id: 'preposition_L2_006',
         type: 'single',
         level: 'L2',
@@ -593,22 +436,6 @@ const PREPOSITION_QUESTIONS = [
         analysis: '"关于"多用于句首，引出谈论范围。'
     },
     {
-        id: 'preposition_L2_007',
-        type: 'single',
-        level: 'L2',
-        category: 'preposition',
-        tag: '介词/功能对比',
-        stem: '下列句子中，应使用"为了"的是（ ）',
-        options: [
-            { key: 'A', text: '___身体原因，他请了假' },
-            { key: 'B', text: '___完成任务，他加班到深夜' },
-            { key: 'C', text: '___下雨，比赛取消了' },
-            { key: 'D', text: '___天气不好，我们没出门' }
-        ],
-        answer: ['B'],
-        analysis: '"为了"表示目的。'
-    },
-    {
         id: 'preposition_L2_008',
         type: 'single',
         level: 'L2',
@@ -623,38 +450,6 @@ const PREPOSITION_QUESTIONS = [
         ],
         answer: ['C'],
         analysis: '目的句不能用"因为"。'
-    },
-    {
-        id: 'preposition_L2_009',
-        type: 'single',
-        level: 'L2',
-        category: 'preposition',
-        tag: '介词/词类辨析',
-        stem: '下列句子中，介词使用错误的是（ ）',
-        options: [
-            { key: 'A', text: '她比我一高点' },
-            { key: 'B', text: '他比了我一下身高' },
-            { key: 'C', text: '他跟过回家' },
-            { key: 'D', text: '他跟在我后面' }
-        ],
-        answer: ['B'],
-        analysis: '"比"作介词不能加动态助词。'
-    },
-    {
-        id: 'preposition_L2_010',
-        type: 'single',
-        level: 'L2',
-        category: 'preposition',
-        tag: '介词/结构选择',
-        stem: '下列句子中，必须使用"把"字句的是（ ）',
-        options: [
-            { key: 'A', text: '他整理房间' },
-            { key: 'B', text: '他把弟弟抱在怀里' },
-            { key: 'C', text: '他看书' },
-            { key: 'D', text: '他写作业' }
-        ],
-        answer: ['B'],
-        analysis: '动词后带处所补语必须用"把"。'
     },
     {
         id: 'preposition_L2_011',
@@ -689,22 +484,6 @@ const PREPOSITION_QUESTIONS = [
         analysis: 'B 为副词；C 为动词。'
     },
     {
-        id: 'preposition_L2_013',
-        type: 'single',
-        level: 'L2',
-        category: 'preposition',
-        tag: '介词/结构选择',
-        stem: '下列句子中，介词短语作句子成分的位置使用正确的是（ ）',
-        options: [
-            { key: 'A', text: '他学习汉语是为了提高水平' },
-            { key: 'B', text: '他是为了提高汉语学习' },
-            { key: 'C', text: '他为了很努力学习汉语' },
-            { key: 'D', text: '他是学习汉语为了提高水平' }
-        ],
-        answer: ['A'],
-        analysis: 'A 中介词短语作目的状语，位置正确。'
-    },
-    {
         id: 'preposition_L2_014',
         type: 'single',
         level: 'L2',
@@ -719,22 +498,6 @@ const PREPOSITION_QUESTIONS = [
         ],
         answer: ['B'],
         analysis: '"朝"用于定向状态。'
-    },
-    {
-        id: 'preposition_L2_015',
-        type: 'single',
-        level: 'L2',
-        category: 'preposition',
-        tag: '介词/结构选择',
-        stem: '下列句子中，介词"从"的结构和位置使用正确的是（ ）',
-        options: [
-            { key: 'A', text: '他从已经北京回来了' },
-            { key: 'B', text: '他从没北京回来' },
-            { key: 'C', text: '他从北京回来了' },
-            { key: 'D', text: '他回来了从北京' }
-        ],
-        answer: ['C'],
-        analysis: '"从北京"作状语，位置正确。'
     },
     {
         id: 'preposition_L2_016',
