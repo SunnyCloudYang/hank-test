@@ -86,22 +86,6 @@ const MODAL_QUESTIONS = [
         analysis: '语气词只影响语气类型，不改变句子语义。'
     },
     {
-        id: 'modal_L1_011',
-        type: 'single',
-        level: 'L1',
-        category: 'modal',
-        tag: '语气词/作用辨析',
-        stem: '下列句子中，加点词“吗”用于构成是非问的是（ ）',
-        options: [
-            { key: 'A', text: '你怎么还不走吗？' },
-            { key: 'B', text: '你已经提交作业了吗？' },
-            { key: 'C', text: '他难道会同意吗？' },
-            { key: 'D', text: '难道你不知道吗？' }
-        ],
-        answer: ['B'],
-        analysis: 'B 中“吗”用于中性的是非问；A带反诘色彩（并非真正求“是/否”信息）；C、D 为反问句式“难道…吗”，语气偏强调。'
-    },
-    {
         id: 'modal_L1_012',
         type: 'multiple',
         level: 'L1',
@@ -123,7 +107,7 @@ const MODAL_QUESTIONS = [
         level: 'L1',
         category: 'modal',
         tag: '语气词/词类识别',
-        stem: '下列句子中，加点词属于语气词“吧”用于缓和语气/提出建议的是（ ）',
+        stem: '下列句中，语气词“吧”用于缓和语气/提出建议的是（ ）',
         options: [
             { key: 'A', text: '把门关好吧，外面风大' },
             { key: 'B', text: '把作业写完了吧' },

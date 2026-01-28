@@ -51,6 +51,16 @@ const AdaptiveEngine = {
         const fixedQuestions = questions.filter(q => q.fixed === true);
         const fixedQuestionIds = fixedQuestions.map(q => q.id);
 
+        // 将固定题目顺序打乱，但整体仍然优先展示
+        if (fixedQuestionIds.length > 1) {
+            for (let i = fixedQuestionIds.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                const temp = fixedQuestionIds[i];
+                fixedQuestionIds[i] = fixedQuestionIds[j];
+                fixedQuestionIds[j] = temp;
+            }
+        }
+
         this.state = {
             currentLevel: this.config.initialLevel,
             consecutiveCorrect: 0,
@@ -339,6 +349,39 @@ const AdaptiveEngine = {
             }
             
             return null; // 所有题目都已答完
+        }
+
+        // 在正常抽题时，尽量让各类别的出题数量更加均衡：
+        // 优先从当前会话中作题数量较少的类别中随机抽题
+        if (availableQuestions.length > 1) {
+            const categoryCounts = {};
+
+            // 统计当前会话中各类别已作题数量
+            this.state.answeredIds.forEach(id => {
+                const q = questions.find(item => item.id === id);
+                if (q && q.category) {
+                    categoryCounts[q.category] = (categoryCounts[q.category] || 0) + 1;
+                }
+            });
+
+            // 找出候选题目中已作题数量最少的类别
+            let minCount = Infinity;
+            availableQuestions.forEach(q => {
+                const count = categoryCounts[q.category] || 0;
+                if (count < minCount) {
+                    minCount = count;
+                }
+            });
+
+            // 只保留属于“当前已作题数量最少类别”的题目，后续再随机抽取一题
+            const balancedCandidates = availableQuestions.filter(q => {
+                const count = categoryCounts[q.category] || 0;
+                return count === minCount;
+            });
+
+            if (balancedCandidates.length > 0) {
+                availableQuestions = balancedCandidates;
+            }
         }
 
         return this._randomSelect(availableQuestions);

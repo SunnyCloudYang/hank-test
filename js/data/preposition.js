@@ -81,22 +81,6 @@ const PREPOSITION_QUESTIONS = [
         fixed: true 
     },
     {
-        id: 'preposition_L1_006',
-        type: 'single',
-        level: 'L1',
-        category: 'preposition',
-        tag: '介词/词类识别',
-        stem: '下列句子中，画线词属于介词的是（ ）',
-        options: [
-            { key: 'A', text: '他从不计较个人得失' },
-            { key: 'B', text: '我们从昨天起开始放假' },
-            { key: 'C', text: '他已经完成作业' },
-            { key: 'D', text: '大家都同意这个方案' }
-        ],
-        answer: ['B'],
-        analysis: '"从"后接时间名词"昨天"，构成介词短语"从昨天起"；A项"从不"中的"从"是副词。'
-    },
-    {
         id: 'preposition_L1_007',
         type: 'single',
         level: 'L1',
@@ -563,23 +547,6 @@ const PREPOSITION_QUESTIONS = [
         answer: ['A', 'C'],
         analysis: 'A、C 中"往"引出方向。'
     },
-    {
-        id: 'preposition_L2_020',
-        type: 'multiple',
-        level: 'L2',
-        category: 'preposition',
-        tag: '介词/词类识别',
-        stem: '下列句子中，加点词语用作介词的是',
-        options: [
-            { key: 'A', text: '他从家里出发' },
-            { key: 'B', text: '他从不迟到' },
-            { key: 'C', text: '她自小就喜欢音乐' },
-            { key: 'D', text: '他在看书' },
-            { key: 'E', text: '爸爸比妈妈高一点' }
-        ],
-        answer: ['A', 'C', 'E'],
-        analysis: 'A："从"后接名词性成分；B：副词用法；C："自"引出时间；D：进行体副词；E："比"引出比较对象。'
-    }
 ];
 
 // 注册到题库
